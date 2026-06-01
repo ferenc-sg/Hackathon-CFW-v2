@@ -33,7 +33,9 @@ export function StatusBadge({ status }: { status: string }) {
 }
 
 export function RoleBadge({ label }: { label: string }) {
-  return <span className="badge bg-brand-50 text-brand-700 border border-brand-100">{label}</span>;
+  return (
+    <span className="badge bg-[#F8F0FD] text-[#9B5DB3] border border-[#E8D5F0]">{label}</span>
+  );
 }
 
 function LockIcon() {
