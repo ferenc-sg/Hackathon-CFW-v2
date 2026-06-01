@@ -112,21 +112,48 @@ constraint is that the database file must live on **persistent, writable
 storage** — so prefer a host that runs a long-lived container with a volume
 over an ephemeral serverless platform.
 
-### Option A — container host with a volume (recommended: Railway / Render / Fly.io)
-A `Dockerfile` is included. It builds the app and, on start, applies the schema
-and seeds **once** if the database is empty (`scripts/docker-start.sh` →
-`prisma/seed-if-empty.ts`), so restarts never wipe data.
+### Recommended — Railway (step-by-step runbook)
 
-1. Push this repo to GitHub (already done on your branch).
-2. Create a new service from the repo on Railway/Render/Fly — it auto-detects the
-   `Dockerfile`.
-3. Add a **persistent volume** mounted at `/data`.
-4. Set the env var `DATABASE_URL=file:/data/dev.db`.
-5. Deploy. Share the public URL with your team.
+A `Dockerfile` is included. On start it applies the schema and seeds the
+database **once** if it is empty (`scripts/docker-start.sh` →
+`prisma/seed-if-empty.ts`), so restarts and redeploys never wipe data.
 
-_Fly.io example:_ `fly launch` (it reads the Dockerfile) → `fly volumes create data -s 1` → set the mount to `/data` in `fly.toml` → `fly deploy`.
+> Prerequisite: this branch (`claude/wizardly-brown-PwKUL`) is pushed to GitHub.
+> For a stable test URL, you may want to merge it to your default branch first,
+> or just deploy this branch directly (step 2 lets you pick the branch).
 
-### Option B — Vercel (serverless)
+1. **Create the project.** Go to [railway.app](https://railway.app) → sign in
+   with GitHub → **New Project** → **Deploy from GitHub repo** → pick
+   `ferenc-sg/Hackathon-CFW-v2`. In the service's **Settings → Source**, set the
+   deploy branch to the one you want (e.g. `claude/wizardly-brown-PwKUL`).
+   Railway auto-detects the `Dockerfile` and starts the first build.
+2. **Add a persistent volume.** Open the service → **Variables/Settings →
+   Volumes** (or right-click the service → *Attach Volume*) → create a volume
+   and set the **mount path** to `/data`. (1 GB is plenty.)
+3. **Set the env var.** Service → **Variables** → add:
+   `DATABASE_URL=file:/data/dev.db`
+   Don't set `PORT` — Railway injects it and the Next.js server uses it
+   automatically.
+4. **Expose a public URL.** Service → **Settings → Networking → Generate
+   Domain**. This gives you a `*.up.railway.app` URL.
+5. **Redeploy** (Railway usually does this automatically after the volume + var
+   changes). Watch the **Deploy logs** — on first boot you'll see
+   `Applying database schema…`, `Empty database detected — running seed…`, then
+   `Starting Next.js…`.
+6. **Open the URL and share it** with your team. The seeded demo users let them
+   try every role via the "Acting as" switcher in the sidebar.
+
+**If a later deploy ever needs a fresh database** (e.g. you re-import the
+spreadsheet): open the service shell / one-off command and run
+`npm run db:reset`, or delete the volume and redeploy.
+
+#### Other container hosts
+The same image works on Render or Fly.io — create a service from the repo, add a
+persistent disk mounted at `/data`, and set `DATABASE_URL=file:/data/dev.db`.
+_Fly.io:_ `fly launch` → `fly volumes create data -s 1` → mount it at `/data` in
+`fly.toml` → `fly deploy`.
+
+### Alternative — Vercel (requires Postgres)
 Vercel's filesystem is ephemeral, so **SQLite won't persist**. To use Vercel,
 switch the datasource to **Postgres** (Vercel Postgres, Neon, or Supabase):
 change `provider = "postgresql"` in `prisma/schema.prisma`, set `DATABASE_URL`
