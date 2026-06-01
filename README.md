@@ -48,8 +48,9 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 - A left sidebar with **Dashboard**, **Framework Library**, **People**, plus
   empty placeholders for **Leveling** (Module 3 — Levelling Flow) and
   **Performance assessment**.
-- **Google SSO** sign-in (Auth.js). Only provisioned users (an email matching a
-  non-archived `User`) may sign in; everyone else sees an access-denied message.
+- **Email + password** sign-in (Auth.js Credentials). Only provisioned users
+  (an email matching a non-archived `User` with a password set) may sign in.
+  Single sign-on (Google) is deferred for later.
 - An "Acting as" switcher (bottom of sidebar, **HR/Admin only**) to impersonate
   any user and see the permission matrix in action, plus a **Sign out** button.
 
@@ -59,15 +60,14 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 
 ```bash
 npm install
-cp .env.example .env   # then set AUTH_DEV_BYPASS="true" for local dev (skips Google SSO)
+cp .env.example .env   # AUTH_DEV_BYPASS="true" skips login for local dev
 npm run setup          # prisma generate + db push + seed
 npm run dev            # http://localhost:3000
 ```
 
-> **Local auth:** with `AUTH_DEV_BYPASS="true"` the app skips Google SSO and acts
-> as the first HR/Admin — convenient for development. To exercise the real
-> sign-in flow locally, set it to `"false"` and provide `AUTH_GOOGLE_ID` /
-> `AUTH_GOOGLE_SECRET` / `AUTH_SECRET` (see [Authentication](#authentication--google-sso)).
+> **Local auth:** with `AUTH_DEV_BYPASS="true"` the app skips login and acts as
+> the first HR/Admin — convenient for development. Set it to `"false"` to use the
+> real email+password sign-in (any seeded user, password `password123`).
 
 Other scripts:
 
@@ -112,34 +112,29 @@ levels (as in the source sheets); the general competencies carry IC2–IC5 **and
 M4–M6. Re-running the extractor regenerates the JSON to re-import on demand
 (FR17c).
 
-## Authentication — Google SSO
+## Authentication — email + password
 
-Sign-in uses **Auth.js (NextAuth v5)** with the Google provider.
+Sign-in uses **Auth.js (NextAuth v5)** with a Credentials provider. (Google SSO
+is deferred; the scaffolding is in place to add it later without re-architecting.)
 
-- **Who can sign in:** only people who have a profile in the system — i.e. a
-  Google email that matches a non-archived `User`. Everyone else is rejected with
-  an access-denied message. An HR/Admin provisions people via **People → New
-  user** (which also seeds their competencies and onboarding to-dos). Optionally
-  set `AUTH_ALLOWED_DOMAIN=saas.group` to additionally restrict by email domain.
-- **Sessions:** stateless JWT cookies (no session tables). The signed-in email is
-  mapped to the `User` record on each request to resolve role + brand.
-- **Impersonation:** an HR/Admin can "act as" another user to test the permission
-  matrix; everyone else is locked to their own identity. **Sign out** is in the
-  sidebar.
+- **Who can sign in:** users provisioned in the system — an email matching a
+  non-archived `User` that has a password set. An HR/Admin creates people via
+  **People → New user** (which sets a password and seeds their competencies +
+  onboarding to-dos).
+- **Demo password:** the seed gives **every seeded user** the password from
+  `SEED_PASSWORD` (default `password123`), so you can sign in as any persona
+  (e.g. `ferenc@saas.group` = HR/Admin, `sofia@channable.example` = Manager,
+  `diego@channable.example` = Team member) to test the permission matrix.
+- **Passwords** are stored as bcrypt hashes (`User.passwordHash`); never in plain
+  text. Sessions are stateless JWT cookies; the signed-in email is mapped to the
+  `User` record each request to resolve role + brand.
+- **Impersonation:** an HR/Admin can "act as" another user; everyone else is
+  locked to their own identity. **Sign out** is in the sidebar.
 
-### One-time Google Cloud setup
-1. [console.cloud.google.com](https://console.cloud.google.com) → create/select a
-   project → **APIs & Services → OAuth consent screen** → configure (Internal if
-   you have a Google Workspace for saas.group).
-2. **APIs & Services → Credentials → Create credentials → OAuth client ID** →
-   type **Web application**.
-3. **Authorized redirect URI:** add
-   `https://<your-domain>/api/auth/callback/google`
-   (e.g. `https://your-app.up.railway.app/api/auth/callback/google`; for local
-   testing also add `http://localhost:3000/api/auth/callback/google`).
-4. Copy the **Client ID** and **Client secret** into `AUTH_GOOGLE_ID` /
-   `AUTH_GOOGLE_SECRET`.
-5. Generate `AUTH_SECRET` with `openssl rand -base64 32`.
+### Setup
+Just set a strong `AUTH_SECRET` (and `AUTH_TRUST_HOST=true` behind a proxy).
+Generate the secret with `openssl rand -base64 32`. Change `SEED_PASSWORD` to a
+non-default value for any shared deployment.
 
 ## Deploying so your team can test
 
@@ -170,24 +165,20 @@ database **once** if it is empty (`scripts/docker-start.sh` →
    ```
    DATABASE_URL=file:/data/dev.db
    AUTH_SECRET=<openssl rand -base64 32>
-   AUTH_GOOGLE_ID=<from Google Cloud>
-   AUTH_GOOGLE_SECRET=<from Google Cloud>
    AUTH_TRUST_HOST=true
-   # optional: AUTH_ALLOWED_DOMAIN=saas.group
+   SEED_PASSWORD=<a shared password for the seeded test users>
    ```
    Don't set `PORT` (Railway injects it) and **don't** set `AUTH_DEV_BYPASS`
-   (leaving it unset keeps SSO enforced).
+   (leaving it unset keeps login enforced).
 4. **Expose a public URL.** Service → **Settings → Networking → Generate
-   Domain**. This gives you a `*.up.railway.app` URL. Then add
-   `https://<that-domain>/api/auth/callback/google` as an authorized redirect URI
-   in your Google OAuth client (see [Authentication](#authentication--google-sso)).
+   Domain** — gives you a `*.up.railway.app` URL.
 5. **Redeploy** (Railway usually does this automatically after the volume + var
    changes). Watch the **Deploy logs** — on first boot you'll see
    `Applying database schema…`, `Empty database detected — running seed…`, then
    `Starting Next.js…`.
-6. **Sign in and invite your team.** Sign in with your Google account
-   (`ferenc@saas.group` is seeded as HR/Admin). Add teammates via **People → New
-   user** with their work email so they can sign in too.
+6. **Sign in and invite your team.** Sign in as `ferenc@saas.group` (seeded
+   HR/Admin) with your `SEED_PASSWORD`. Add teammates via **People → New user**
+   with their email + a password so they can sign in too.
 
 **If a later deploy ever needs a fresh database** (e.g. you re-import the
 spreadsheet): open the service shell / one-off command and run
@@ -207,13 +198,16 @@ to the Postgres connection string, run `prisma db push` + seed once, then deploy
 I can make this switch for you if you'd like to go this route.
 
 ### Before you publish — things to know
-- **Access is gated by Google SSO** and limited to provisioned users, so the URL
-  is safe to share — only people you've added (and who pass the optional domain
-  check) can get in. Make sure `AUTH_DEV_BYPASS` is **unset/false** in the deploy
-  (it is by default).
+- **Access is gated by email + password** and limited to provisioned users, so
+  the URL is only usable by people you've given an account. Make sure
+  `AUTH_DEV_BYPASS` is **unset/false** in the deploy (it is by default), and set a
+  non-default `SEED_PASSWORD`.
+- **This is a shared test password setup**, not production-grade auth (no
+  password reset, lockout, or MFA). Fine for an internal test; Google SSO is the
+  intended longer-term sign-in.
 - **Seed data includes demo users** (e.g. `*.example` accounts) used to showcase
-  the permission matrix. They can't actually sign in (no real Google account);
-  remove them once real users are added if you prefer a clean directory.
+  the permission matrix — they all share the `SEED_PASSWORD`. Remove them once
+  real users are added if you prefer a clean directory.
 
 ## Out of scope for v1 (per PRD §7)
 Levelling Flow execution, onboarding/education UI, performance ratings,

@@ -1,32 +1,42 @@
 import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { prisma } from "@/lib/db";
+import { verifyPassword } from "@/lib/password";
 
-// Full Auth.js instance (Node runtime — may use Prisma). Used by the API route
-// handlers, server components, and server actions.
+// Full Auth.js instance (Node runtime — uses Prisma + bcrypt). Used by the API
+// route handlers, server components, and server actions.
 //
-// Access policy: a Google account may sign in ONLY if its email matches an
-// existing, non-archived User (i.e. the person has been provisioned by an
-// HR/Admin). An optional AUTH_ALLOWED_DOMAIN further restricts by email domain.
+// Email + password login: credentials are checked against the User table. Only
+// non-archived users with a password set can sign in. (Google SSO is deferred.)
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
-  session: { strategy: "jwt" },
+  providers: [
+    Credentials({
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = String(credentials?.email ?? "").toLowerCase().trim();
+        const password = String(credentials?.password ?? "");
+        if (!email || !password) return null;
+
+        const user = await prisma.user.findFirst({
+          where: { email, archivedAt: null },
+        });
+        if (!user || !user.passwordHash) return null;
+
+        const ok = await verifyPassword(password, user.passwordHash);
+        if (!ok) return null;
+
+        return { id: user.id, email: user.email, name: user.name };
+      },
+    }),
+  ],
   callbacks: {
-    async signIn({ user, profile }) {
-      const email = (profile?.email ?? user?.email ?? "").toLowerCase();
-      if (!email) return false;
-
-      const allowedDomain = process.env.AUTH_ALLOWED_DOMAIN?.toLowerCase();
-      if (allowedDomain && !email.endsWith(`@${allowedDomain}`)) return false;
-
-      const existing = await prisma.user.findFirst({
-        where: { email, archivedAt: null },
-        select: { id: true },
-      });
-      return !!existing;
-    },
-    async jwt({ token, profile }) {
-      if (profile?.email) token.email = profile.email.toLowerCase();
+    async jwt({ token, user }) {
+      if (user?.email) token.email = user.email.toLowerCase();
       return token;
     },
     async session({ session, token }) {

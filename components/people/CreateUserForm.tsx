@@ -94,9 +94,18 @@ export function CreateUserForm({
                   </select>
                 </div>
               </div>
+              <div>
+                <label className="label">Password</label>
+                <input
+                  name="password"
+                  type="text"
+                  className="input mt-1"
+                  placeholder="Leave blank for the default demo password"
+                />
+              </div>
               <p className="text-xs text-slate-400">
                 Competencies are auto-assigned from the Library via the read contract; onboarding
-                to-dos are created automatically.
+                to-dos are created automatically. The user signs in with their email + this password.
               </p>
               <div className="flex justify-end gap-2 pt-2">
                 <button type="button" className="btn-secondary" onClick={() => setOpen(false)}>

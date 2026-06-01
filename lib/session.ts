@@ -8,7 +8,7 @@ const ACTOR_COOKIE = "cfms_impersonate";
 
 const devBypass = process.env.AUTH_DEV_BYPASS === "true";
 
-// The real, authenticated user (Google SSO email → provisioned User record).
+// The real, authenticated user (signed-in email → provisioned User record).
 // With AUTH_DEV_BYPASS the first HR/Admin is returned (local development only).
 export async function getSelfUser() {
   if (devBypass) {
