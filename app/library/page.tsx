@@ -142,7 +142,10 @@ export default async function LibraryPage({
     });
   } else if (view.startsWith("family-")) {
     const familyId = view.slice("family-".length);
-    columns = levels.map((l) => ({ code: l.code, label: l.label, track: l.track.name }));
+    // Functional competencies are defined on the IC levels in the source
+    // spreadsheet, so the family grid shows the IC2–IC5 columns.
+    const icLevels = levels.filter((l) => l.track.name === "IC");
+    columns = icLevels.map((l) => ({ code: l.code, label: l.label, track: l.track.name }));
     const codes = columns.map((c) => c.code);
 
     const links = await prisma.jobFamilyCompetency.findMany({

@@ -83,13 +83,64 @@ Other scripts:
 
 ---
 
-## Notes on content fidelity
+## Content — loaded verbatim from the source spreadsheet
 
-The source spreadsheet (FR9) was not provided to this build, so the seeded
-competency text is **representative and structurally faithful** — correct
-shapes, ordering, tracks, and per-level bullet arrays. The PRD's re-runnable
-importer with naming-mismatch reconciliation (FR17c) is the intended mechanism
-to load the authoritative spreadsheet content on top of this structure.
+The Framework Library is loaded **strictly from the provided
+`CAREER_FRAMEWORK` spreadsheet** — 5 general competencies (defined on both the
+IC and Manager tracks) and 54 functional competencies across the 8 job families,
+**950 per-level bullets** in total, preserving source order and text exactly.
+
+The extraction is a two-step, re-runnable pipeline:
+
+```bash
+# 1. Extract the spreadsheet into structured JSON (per-sheet column mapping)
+python3 scripts/extract_framework.py <path-to.xlsx> prisma/framework-content.json
+# 2. Load it (the seed reads prisma/framework-content.json)
+npm run db:seed
+```
+
+`prisma/framework-content.json` is committed, so the seed runs without the
+spreadsheet present. Functional competencies are defined on the **IC2–IC5**
+levels (as in the source sheets); the general competencies carry IC2–IC5 **and**
+M4–M6. Re-running the extractor regenerates the JSON to re-import on demand
+(FR17c).
+
+## Deploying so your team can test
+
+The app is a standard Next.js server + a **SQLite** file. The only real
+constraint is that the database file must live on **persistent, writable
+storage** — so prefer a host that runs a long-lived container with a volume
+over an ephemeral serverless platform.
+
+### Option A — container host with a volume (recommended: Railway / Render / Fly.io)
+A `Dockerfile` is included. It builds the app and, on start, applies the schema
+and seeds **once** if the database is empty (`scripts/docker-start.sh` →
+`prisma/seed-if-empty.ts`), so restarts never wipe data.
+
+1. Push this repo to GitHub (already done on your branch).
+2. Create a new service from the repo on Railway/Render/Fly — it auto-detects the
+   `Dockerfile`.
+3. Add a **persistent volume** mounted at `/data`.
+4. Set the env var `DATABASE_URL=file:/data/dev.db`.
+5. Deploy. Share the public URL with your team.
+
+_Fly.io example:_ `fly launch` (it reads the Dockerfile) → `fly volumes create data -s 1` → set the mount to `/data` in `fly.toml` → `fly deploy`.
+
+### Option B — Vercel (serverless)
+Vercel's filesystem is ephemeral, so **SQLite won't persist**. To use Vercel,
+switch the datasource to **Postgres** (Vercel Postgres, Neon, or Supabase):
+change `provider = "postgresql"` in `prisma/schema.prisma`, set `DATABASE_URL`
+to the Postgres connection string, run `prisma db push` + seed once, then deploy.
+I can make this switch for you if you'd like to go this route.
+
+### Before you publish — two things to know
+- **No authentication in v1** (it's out of scope in the PRD). The "Acting as"
+  switcher lets anyone impersonate any role, including HR/Admin. That's ideal for
+  a controlled internal test, but **don't expose it publicly without protection**
+  — put it behind your VPN/SSO, HTTP basic auth, or the host's password-protect
+  feature, or restrict access to your team.
+- **Seed data includes demo users.** Real people can be added in-app (People →
+  New user) or you can clear the demo users first.
 
 ## Out of scope for v1 (per PRD §7)
 Levelling Flow execution, onboarding/education UI, performance ratings,

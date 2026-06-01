@@ -1,11 +1,7 @@
 import "dotenv/config";
+import { readFileSync } from "fs";
+import { join } from "path";
 import { PrismaClient } from "@prisma/client";
-import {
-  GENERAL_COMPETENCIES,
-  JOB_FAMILIES,
-  ALL_CODES,
-  type CompetencyDef,
-} from "./seed-content";
 import {
   CompetencyType,
   CompetencyScope,
@@ -20,7 +16,24 @@ import {
 
 const prisma = new PrismaClient();
 
-// ── Level structure (PRD §System overview). IC1 / IC6 are reserved, not seeded.
+// ── Framework content extracted verbatim from the source spreadsheet ─────────
+// (scripts/extract_framework.py -> prisma/framework-content.json).
+type CompetencyDef = {
+  name: string;
+  description?: string;
+  levels: Record<string, string[]>;
+};
+type FrameworkContent = {
+  levelLabels: Record<string, string>;
+  general: CompetencyDef[];
+  families: { name: string; sourceSheet: string; displayOrder: number; competencies: CompetencyDef[] }[];
+};
+
+const content: FrameworkContent = JSON.parse(
+  readFileSync(join(process.cwd(), "prisma", "framework-content.json"), "utf8")
+);
+
+// ── Level structure (PRD §System overview). IC1 / IC6 reserved, not seeded. ──
 const LEVELS = {
   IC: [
     { code: "IC2", label: "Beginner", order: 1 },
@@ -42,10 +55,8 @@ async function wipe() {
   await prisma.todoItem.deleteMany();
   await prisma.competencyLevelExpectation.deleteMany();
   await prisma.jobFamilyCompetency.deleteMany();
-  // Delete forks first (self-FK), then the rest.
   await prisma.competency.deleteMany({ where: { provenance: Provenance.BRAND_FORK } });
   await prisma.competency.deleteMany();
-  // Clear manager self-FK before deleting users.
   await prisma.user.updateMany({ data: { managerId: null } });
   await prisma.user.deleteMany();
   await prisma.jobFamily.deleteMany();
@@ -55,7 +66,7 @@ async function wipe() {
 }
 
 async function main() {
-  console.log("Seeding CFMS…");
+  console.log("Seeding CFMS from spreadsheet content…");
   await wipe();
 
   // ── Brands ────────────────────────────────────────────────────────────────
@@ -76,18 +87,13 @@ async function main() {
     }
   }
 
-  // A primary HR/Admin created early so it can stand as the publisher of v1
-  // content versions.
+  // Primary HR/Admin — stands as the publisher of v1 content versions.
   const ferenc = await prisma.user.create({
-    data: {
-      name: "Ferenc Csonka",
-      email: "ferenc@saas.group",
-      brandId: central.id,
-      role: Role.HR_ADMIN,
-    },
+    data: { name: "Ferenc Csonka", email: "ferenc@saas.group", brandId: central.id, role: Role.HR_ADMIN },
   });
 
-  // ── Helper: create a competency with per-level PUBLISHED expectations + v1 ──
+  // Create a competency + PUBLISHED per-level expectations for the levels that
+  // the spreadsheet actually defines for it (general: IC+M; functional: IC).
   async function createCompetency(
     def: CompetencyDef,
     opts: {
@@ -96,7 +102,6 @@ async function main() {
       provenance: string;
       jobFamilyId?: string | null;
       brandId?: string | null;
-      forkedFromId?: string | null;
     }
   ) {
     const comp = await prisma.competency.create({
@@ -108,11 +113,10 @@ async function main() {
         provenance: opts.provenance,
         jobFamilyId: opts.jobFamilyId ?? null,
         brandId: opts.brandId ?? null,
-        forkedFromId: opts.forkedFromId ?? null,
       },
     });
-    for (const code of ALL_CODES) {
-      const bullets = def.bullets[code] ?? [];
+    for (const [code, bullets] of Object.entries(def.levels)) {
+      if (!levelByCode[code]) continue;
       const cle = await prisma.competencyLevelExpectation.create({
         data: {
           competencyId: comp.id,
@@ -134,8 +138,8 @@ async function main() {
     return comp;
   }
 
-  // ── General competencies (5 SHARED_BASELINE, both tracks) ──────────────────
-  for (const def of GENERAL_COMPETENCIES) {
+  // ── General competencies (SHARED_BASELINE, IC + M) ──────────────────────────
+  for (const def of content.general) {
     await createCompetency(def, {
       type: CompetencyType.GENERAL,
       scope: CompetencyScope.GLOBAL,
@@ -143,13 +147,11 @@ async function main() {
     });
   }
 
-  // ── Job families + functional competencies ─────────────────────────────────
+  // ── Job families + functional competencies (source order preserved) ─────────
   const familyByName: Record<string, string> = {};
-  const engineeringCompByName: Record<string, string> = {};
-  for (let fi = 0; fi < JOB_FAMILIES.length; fi++) {
-    const fam = JOB_FAMILIES[fi];
+  for (const fam of content.families) {
     const family = await prisma.jobFamily.create({
-      data: { name: fam.name, description: fam.description, displayOrder: fi + 1 },
+      data: { name: fam.name, displayOrder: fam.displayOrder },
     });
     familyByName[fam.name] = family.id;
 
@@ -163,65 +165,18 @@ async function main() {
       await prisma.jobFamilyCompetency.create({
         data: { jobFamilyId: family.id, competencyId: comp.id, displayOrder: ci + 1 },
       });
-      if (fam.name === "Engineering") engineeringCompByName[comp.name] = comp.id;
     }
   }
 
-  // ── Brand examples: a BRAND_FORK and a BRAND_ADDON for Channable ────────────
-  // Channable forks "Code Quality & Craft" to tailor its IC4/IC5 expectations.
-  const baselineCQ = JOB_FAMILIES.find((f) => f.name === "Engineering")!.competencies.find(
-    (c) => c.name === "Code Quality & Craft"
-  )!;
-  const forkBullets = { ...baselineCQ.bullets } as Record<string, string[]>;
-  forkBullets.IC4 = [
-    "Owns code quality end-to-end at Channable, including our feed-processing scale.",
-    "Champions Channable's automated-testing and review standards.",
-  ];
-  forkBullets.IC5 = [
-    "Sets Channable's engineering craft standard across squads.",
-    "Drives quality initiatives spanning the Channable platform.",
-  ];
-  await createCompetency(
-    { name: "Code Quality & Craft", description: baselineCQ.description, bullets: forkBullets },
-    {
-      type: CompetencyType.FUNCTIONAL,
-      scope: CompetencyScope.FAMILY,
-      provenance: Provenance.BRAND_FORK,
-      jobFamilyId: familyByName["Engineering"],
-      brandId: channable.id,
-      forkedFromId: engineeringCompByName["Code Quality & Craft"],
-    }
-  );
+  // ── Demo users (Module 2) ────────────────────────────────────────────────────
+  const mTrackId = (await prisma.track.findFirstOrThrow({ where: { name: TrackName.M } })).id;
+  const icTrackId = (await prisma.track.findFirstOrThrow({ where: { name: TrackName.IC } })).id;
 
-  // Channable adds a general competency (add-on) on top of the five shared ones.
-  await createCompetency(
-    {
-      name: "Customer Obsession",
-      description: "Channable's brand-specific emphasis on customer outcomes.",
-      bullets: {
-        IC2: ["Understands who Channable's customers are and what they need."],
-        IC3: ["Factors customer impact into day-to-day decisions."],
-        IC4: ["Advocates for the customer across the squad."],
-        IC5: ["Embeds customer obsession into how the org operates."],
-        M4: ["Builds a customer-obsessed team culture."],
-        M5: ["Drives customer focus across multiple teams."],
-        M6: ["Makes customer obsession a strategic pillar."],
-      },
-    },
-    {
-      type: CompetencyType.GENERAL,
-      scope: CompetencyScope.GLOBAL,
-      provenance: Provenance.BRAND_ADDON,
-      brandId: channable.id,
-    }
-  );
-
-  // ── Demo users ──────────────────────────────────────────────────────────────
   const anna = await prisma.user.create({
     data: { name: "Anna Kovács", email: "anna@saas.group", brandId: central.id, role: Role.HR_ADMIN },
   });
 
-  const bram = await prisma.user.create({
+  await prisma.user.create({
     data: {
       name: "Bram de Vries",
       email: "bram@channable.example",
@@ -238,14 +193,12 @@ async function main() {
       brandId: channable.id,
       role: Role.MANAGER,
       jobFamilyId: familyByName["Engineering"],
-      trackId: (await prisma.track.findFirst({ where: { name: TrackName.M } }))!.id,
+      trackId: mTrackId,
       levelId: levelByCode["M4"],
       growthPath: GrowthPath.ADVANCE_LEVEL,
       growthPathUpdatedAt: new Date(),
     },
   });
-
-  const icTrackId = (await prisma.track.findFirst({ where: { name: TrackName.IC } }))!.id;
 
   const diego = await prisma.user.create({
     data: {
@@ -287,7 +240,7 @@ async function main() {
       brandId: tower.id,
       role: Role.MANAGER,
       jobFamilyId: familyByName["Product Management"],
-      trackId: (await prisma.track.findFirst({ where: { name: TrackName.M } }))!.id,
+      trackId: mTrackId,
       levelId: levelByCode["M5"],
     },
   });
@@ -314,7 +267,7 @@ async function main() {
       brandId: central.id,
       role: Role.MANAGER,
       jobFamilyId: familyByName["Marketing"],
-      trackId: (await prisma.track.findFirst({ where: { name: TrackName.M } }))!.id,
+      trackId: mTrackId,
       levelId: levelByCode["M4"],
     },
   });
@@ -339,7 +292,7 @@ async function main() {
       brandId: rendin.id,
       role: Role.MANAGER,
       jobFamilyId: familyByName["Sales"],
-      trackId: (await prisma.track.findFirst({ where: { name: TrackName.M } }))!.id,
+      trackId: mTrackId,
       levelId: levelByCode["M4"],
     },
   });
@@ -357,13 +310,12 @@ async function main() {
     },
   });
 
-  const allUsers = [ferenc, anna, bram, sofia, diego, yuki, liam, maya, nora, tom, eve, kristjan];
+  const allUsers = [ferenc, anna, sofia, diego, yuki, liam, maya, nora, tom, eve, kristjan];
 
   // ── Assign competencies via the read contract + onboarding to-dos ───────────
   const { resolveCompetencies } = await import("../lib/readContract");
 
   for (const u of allUsers) {
-    // Onboarding to-dos (auto-created on registration — PRD §3.7).
     await prisma.todoItem.createMany({
       data: [
         { userId: u.id, title: "Complete career framework onboarding", triggerType: TodoTrigger.ONBOARDING },
@@ -371,7 +323,6 @@ async function main() {
         { userId: u.id, title: "Complete self-levelling exercise", triggerType: TodoTrigger.ONBOARDING },
       ],
     });
-
     if (!u.jobFamilyId) continue;
     const resolved = await resolveCompetencies(u.jobFamilyId, u.brandId);
     const all = [...resolved.generalCompetencies, ...resolved.functionalCompetencies];
@@ -380,7 +331,6 @@ async function main() {
         data: {
           userId: u.id,
           competencyId: c.id,
-          // If the user has a finalised level, reflect it as the assessed level.
           assessedLevelId: u.levelId ?? null,
           assessedAt: u.levelId ? new Date() : null,
         },
@@ -388,13 +338,8 @@ async function main() {
     }
   }
 
-  // Mark some onboarding to-dos complete for a couple of users.
   const diegoTodos = await prisma.todoItem.findMany({ where: { userId: diego.id } });
-  await prisma.todoItem.update({
-    where: { id: diegoTodos[0].id },
-    data: { completedAt: new Date() },
-  });
-  // A manual to-do added by HR/Admin.
+  await prisma.todoItem.update({ where: { id: diegoTodos[0].id }, data: { completedAt: new Date(), archivedAt: new Date() } });
   await prisma.todoItem.create({
     data: {
       userId: yuki.id,
@@ -407,47 +352,20 @@ async function main() {
   // ── Levelling history (append-only) ─────────────────────────────────────────
   await prisma.levellingHistoryRecord.createMany({
     data: [
-      {
-        userId: diego.id,
-        cycleLabel: "Q2 2025 — development cycle",
-        trackId: icTrackId,
-        levelId: levelByCode["IC2"],
-        method: LevellingMethod.MANAGER_MANUAL,
-        finalisedById: sofia.id,
-        finalisedAt: new Date("2025-06-15"),
-      },
-      {
-        userId: diego.id,
-        cycleLabel: "Q4 2025 — performance cycle",
-        trackId: icTrackId,
-        levelId: levelByCode["IC3"],
-        method: LevellingMethod.MANAGER_MANUAL,
-        finalisedById: sofia.id,
-        finalisedAt: new Date("2025-12-10"),
-      },
-      {
-        userId: maya.id,
-        cycleLabel: "Q4 2025 — performance cycle",
-        trackId: icTrackId,
-        levelId: levelByCode["IC4"],
-        method: LevellingMethod.HR_ADMIN_MANUAL,
-        finalisedById: anna.id,
-        finalisedAt: new Date("2025-12-12"),
-      },
+      { userId: diego.id, cycleLabel: "Q2 2025 — development cycle", trackId: icTrackId, levelId: levelByCode["IC2"], method: LevellingMethod.MANAGER_MANUAL, finalisedById: sofia.id, finalisedAt: new Date("2025-06-15") },
+      { userId: diego.id, cycleLabel: "Q4 2025 — performance cycle", trackId: icTrackId, levelId: levelByCode["IC3"], method: LevellingMethod.MANAGER_MANUAL, finalisedById: sofia.id, finalisedAt: new Date("2025-12-10") },
+      { userId: maya.id, cycleLabel: "Q4 2025 — performance cycle", trackId: icTrackId, levelId: levelByCode["IC4"], method: LevellingMethod.HR_ADMIN_MANUAL, finalisedById: anna.id, finalisedAt: new Date("2025-12-12") },
     ],
   });
 
   const counts = {
     brands: await prisma.brand.count(),
-    tracks: await prisma.track.count(),
     levels: await prisma.level.count(),
     jobFamilies: await prisma.jobFamily.count(),
     competencies: await prisma.competency.count(),
     expectations: await prisma.competencyLevelExpectation.count(),
     users: await prisma.user.count(),
     userCompetencies: await prisma.userCompetency.count(),
-    todos: await prisma.todoItem.count(),
-    history: await prisma.levellingHistoryRecord.count(),
   };
   console.log("Seed complete:", counts);
 }

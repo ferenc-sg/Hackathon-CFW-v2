@@ -1,0 +1,1864 @@
+{
+  "levelLabels": {
+    "IC2": "Beginner",
+    "IC3": "Proficient",
+    "IC4": "Fully proficient",
+    "IC5": "Domain expert",
+    "M4": "Team Lead",
+    "M5": "Senior Manager",
+    "M6": "Strategic Leader"
+  },
+  "general": [
+    {
+      "name": "Influence",
+      "levels": {
+        "IC2": [
+          "Works closely with their own team.",
+          "Understands team strategy and direction.",
+          "Their direct impact focuses on themselves and their immediate peers."
+        ],
+        "IC3": [
+          "Works primarily in own function with occasional cross-team collaboration.",
+          "Applies strategy daily while contributing to team/brand strategy; influences functional decisions with key insights.",
+          "Leads projects, coordinates cross-functional work."
+        ],
+        "IC4": [
+          "Collaborates across seniorities and departments; may oversee freelancers or manage less senior staff (if growing into M role).",
+          "Actively contributes to strategic decisions; advocates business decisions to wider teams.",
+          "Leads high-risk&impact projects and process improvements, identifies growth opportunities; owns KPIs/roadmap."
+        ],
+        "IC5": [
+          "Partners with senior leadership to align and advance goals.",
+          "Sets functional area strategy (short/medium-term); leads discussions around team direction and priorities.",
+          "Drives strategic impact through projects and initiatives within and beyond their direct brand/team; acts as a multiplier."
+        ],
+        "M4": [
+          "Coordinates a small functional team (1-4 ICs) within a brand / central team.",
+          "Receives high-level strategy and implementation guidance from senior managers, cascades and executes it. Defines team's focus, expectations and deliverables, owns goal-setting, develops structure and processes.",
+          "Accountable for team results and contributions to general business goals."
+        ],
+        "M5": [
+          "Oversees a major part of a brand (e.g., Product&Tech or Commercial side), or a central function with several teams, or a larger department (4-10 people, ICs and Managers).",
+          "Sets strategic direction, owns team P&L, manages performance and ensures strategic alignment. Guides Managers in goal-setting and roadmapping. Pursues growth and scaling opportunities."
+        ],
+        "M6": [
+          "Accountable for entire brand, major central function, or large department within a brand, with many management levels. Sets the strategic direction and manages overall performance for their org.",
+          "Defines and communicates a compelling vision, manages full strategy process, able to see and plan 2+ years ahead.",
+          "Contributes to group-wide roadmap and KPIs, responsible for delivering their own team's roadmap and KPIs. Helps shape strategies across brands/teams with significant cross-group impact."
+        ]
+      }
+    },
+    {
+      "name": "Autonomy",
+      "levels": {
+        "IC2": [
+          "Works with a limited degree of autonomy, supported by the team.",
+          "Receives task directions and priorities, follows established rules and guidelines; receives help from more experienced colleagues."
+        ],
+        "IC3": [
+          "Self-reliant in their expertise area with minimal supervision; seeks guidance on critical/complex decisions.",
+          "Works with general direction to complete projects; prioritizes tasks effectively."
+        ],
+        "IC4": [
+          "Works independently within their role; leads projects without formal authority; makes well-reasoned decisions independently.",
+          "Proactively influences team/organizational processes; supports others in prioritizing and improving efficiency."
+        ],
+        "IC5": [
+          "Recognized key decision-maker in their expertise area; influences company direction/performance.",
+          "Shapes organizational guidelines and frameworks; defines priorities aligned with business strategy."
+        ],
+        "M4": [
+          "Makes project/people decisions, typically not the main decision maker for a broader function.",
+          "Remains hands-on with key operational responsibilities. Sets clear expectations and goals for the team, delegates effectively and ensures task completion without micromanagement."
+        ],
+        "M5": [
+          "Independently makes people decisions within the department, proposes budgets, workforce plans, provides product strategy input. Takes calculated risks; allocates resources to meet targets.",
+          "Delegates projects/responsibilities based on team readiness. Partially hands-on, impact multiplier."
+        ],
+        "M6": [
+          "Independent and final decision-maker in their department/area, including headcounts and budgets.",
+          "Delegates responsibility across their team, focusing on strategic oversight and aiming for a hands-off approach."
+        ]
+      }
+    },
+    {
+      "name": "Proficiency",
+      "levels": {
+        "IC2": [
+          "Confidently handles small to medium tasks. Identifies simple problems and seeks assistance from colleagues to resolve them.",
+          "Uses familiar tools and methods to solve problems.",
+          "Learns and progresses quickly, eager to ask questions, actively seeks out feedback."
+        ],
+        "IC3": [
+          "Delivers high-quality work, leads smaller projects, and contributes to larger ones. Solves complex problems using data to make decisions, both in their role and across the team.",
+          "Identifies opportunities for improvement with new tools and methods.",
+          "Assists in training new team members, provides feedback."
+        ],
+        "IC4": [
+          "Manages complex, large-scale projects across teams/departments. Resolves complex issues independently, contributes to innovative solutions.",
+          "Develops complex processes, sets high work standards.",
+          "Possesses deep expertise, mentors juniors, shares market insights, and provides proactive feedback."
+        ],
+        "IC5": [
+          "Owns and leads large, complex projects across the organization. Solves the team’s most challenging problems.",
+          "Develops systems and processes enhancing team effectiveness.",
+          "Acts as a subject matter expert and thought leader, provides mentoring and feedback across teams."
+        ],
+        "M4": [
+          "Develops leadership skills. Creates inclusive environment, focuses on team success/wellbeing, aligns the team with company culture.",
+          "Effectively communicates priorities and holds the team accountable. Manages a part of roadmap and/or owns KPI delivery (3-6 months perspective). Leads team projects, clears roadblocks, empowers the team. Balances people management with delivery.",
+          "Provides quality feedback; supports team member's growth, aligns their career goals with business needs, addresses performance issues.",
+          "Drives AI adoption within the team to improve efficiency and team productivity."
+        ],
+        "M5": [
+          "Sets and owns team roadmap aligned with company strategy; contributes to short (<1y) and mid-term (1-3y) goals; oversees multiple projects; drives key results for company growth.",
+          "Understands organizational design and organizes team to fulfill vision/mission. Manages recruitment, attracts and retains top talent. Skilled in people management, receives high satisfaction scores for leadership. Develops other leaders through frameworks/best practices.",
+          "Leads AI innovation, promotes tooling adoption, and educates others."
+        ],
+        "M6": [
+          "Accountable for multiple roadmaps and strategies, focuses especially on mid-term (1-3y) and long-term (3+y) goals.",
+          "Develops new strategies, builds high-performing teams and holds managers accountable for delivery/execution.",
+          "Brings profound management experience; grows Team Leads/Senior Managers; coaches leaders across saas.group.",
+          "Drives the org's AI adoption strategy that focuses on business impact and addresses market opportunities and threats."
+        ]
+      }
+    },
+    {
+      "name": "Collaboration",
+      "levels": {
+        "IC2": [
+          "Communicates effectively in English; expresses thoughts clearly, succinctly, and constructively.",
+          "Keeps everyone updated on task progress.",
+          "Provides timely, constructive feedback; seeks help when blocked; aligns with team values."
+        ],
+        "IC3": [
+          "Explains complex concepts clearly.",
+          "Effectively advocates for ideas and pushes back when necessary.",
+          "Shares knowledge and motivates teammates; lives team values and sets a positive example."
+        ],
+        "IC4": [
+          "Ensures open and effective communication across all levels of the organization.",
+          "Independently manages stakeholder relationships; able to mediate and resolve conflicts.",
+          "Embodies and promotes team values as a role model."
+        ],
+        "IC5": [
+          "Communicates the most complex ideas simply and clearly",
+          "Facilitates collaboration, fosters open communication and a culture of shared success. Proactively surfaces and addresses team-wide concerns."
+        ],
+        "M4": [
+          "Shares information, explains management decisions and company strategy.",
+          "Builds relationships with key stakeholders across the group, participates in group-level initiatives, partners with other functions for project delivery; delivers clear reports."
+        ],
+        "M5": [
+          "Manages difficult leadership situations effectively and communicates impactful changes across saas.group (e.g. through QBRs). Maintains bi-directional feedback exchange with the Board.",
+          "Proactively builds cross-group relationships and leads initiatives to enhance collaboration."
+        ],
+        "M6": [
+          "Acts as a connector between saas.group teams, leads cross-functional communication.",
+          "Reports to the Board on key metrics, milestones, goals, and strategic decisions. Manages stakeholder relationships ensuring cross-group collaboration and alignment."
+        ]
+      }
+    },
+    {
+      "name": "AI Application & Enablement",
+      "levels": {
+        "IC2": [
+          "Uses AI tools regularly for role-appropriate tasks (drafting, research, summarization); doesn't rely exclusively on manual approaches where AI can help.",
+          "Accepts that AI outputs need review; is developing instincts for when to trust and when to question results.",
+          "Open to learning from peers about effective AI use; shares observations and curiosities with the team.",
+          "Shares occasional AI tips or useful tools with colleagues."
+        ],
+        "IC3": [
+          "Uses AI as a genuine part of their workflow with tangible impact - time saved, quality improved, scope expanded.",
+          "Actively frames problems and provides context to get quality output; iterates with intention. Recognizes when AI output is confidently wrong and applies judgment about what to keep, verify, or do themselves.",
+          "Contributes to team AI knowledge by sharing what works, introducing useful tools, or helping peers get started.",
+          "May introduce specific tools or approaches to teammates."
+        ],
+        "IC4": [
+          "AI is embedded in how they work, with agentic tools or structured workflows tailored to their role and function.",
+          "Evaluates new tools with rigor: considers integration, data privacy, security, and actual fit before committing. Articulates impact of AI adoption clearly.",
+          "Actively supports AI adoption across the team - shares best practices, identifies AI opportunities in colleagues' workflows, and may run demos, build guides, or embed AI into team processes."
+        ],
+        "IC5": [
+          "AI is deeply embedded across all aspects of their work; sets the standard for responsible, effective AI use in their function. Champions innovation, experimentation and the discovery of new application areas for AI.",
+          "Defines tooling strategy with an evidence-based evaluation framework; balances innovation against risk.",
+          "Builds internal resources - guides, tooling education, adoption roadmaps - that create durable AI capability beyond their own practice.",
+          "Drives cross-functional AI initiatives; mentors others and builds organizational AI maturity well beyond their immediate team."
+        ],
+        "M4": [
+          "Ensures every team member has access to and is actively using AI tools appropriate to their role; removes blockers to adoption (training gaps, tooling access, unclear guidelines).",
+          "Tracks how AI adoption is affecting team throughput, quality, and capacity.",
+          "Identifies AI-driven efficiency gains at the team level; can articulate why specific tools or workflows were chosen and what problem they solve.",
+          "Creates space for experimentation; tracks before/after impact with a results-oriented lens."
+        ],
+        "M5": [
+          "Defines the AI adoption roadmap for their department; sets clear expectations for AI fluency at each level and holds the team accountable.",
+          "Builds AI-augmented workflows into team processes as defaults, not optionals. Leads tooling evaluation and adoption decisions for their area.",
+          "Identifies where AI can create new capabilities for the department - not just efficiency on existing work - and invests accordingly.",
+          "Develops AI fluency in managers and senior ICs; shares learnings cross-functionally."
+        ],
+        "M6": [
+          "Drives the organization's AI adoption strategy with a focus on business impact, market opportunities, and competitive positioning.",
+          "Makes investment decisions on AI tooling and infrastructure that enable the organization to punch above its weight. Accountable for measurable AI-driven outcomes at the org level.",
+          "Sets AI fluency standards across the org; defines what great looks like and ensures org-wide implementation.",
+          "Champions AI innovation externally (customers, partners, group-level stakeholders) as a differentiator."
+        ]
+      }
+    }
+  ],
+  "families": [
+    {
+      "name": "Engineering",
+      "sourceSheet": "Engineering",
+      "displayOrder": 1,
+      "competencies": [
+        {
+          "name": "SOFTWARE DESIGN & ARCHITECTURE",
+          "levels": {
+            "IC2": [
+              "Understands basic software design principles.",
+              "Familiar with common design patterns and their applications.",
+              "Assists in designing components or modules with guidance.",
+              "Understands the basics of data model design and simple schemas.",
+              "Understands basic security principles and practices, and implements them in code based on specifications."
+            ],
+            "IC3": [
+              "Designs moderately complex systems/apps and components independently.",
+              "Applies design patterns appropriately to solve common problems.",
+              "Contributes to system architecture discussions and decisions.",
+              "Designs efficient and normalized data schemas.",
+              "Implements security best practices in code with guidance and provides feedback on potential threats."
+            ],
+            "IC4": [
+              "Leads the design of complex, scalable, secure and robust systems / apps.",
+              "Expert in applying design patterns and architectural principles.",
+              "Guides and reviews architecture for projects and teams.",
+              "Designs comprehensive data models for large-scale applications.",
+              "Mentors others in best practices for testing and security. Regularly checks if the system meets security requirements."
+            ],
+            "IC5": [
+              "Defines the overall system architecture and design strategy.",
+              "Expert in designing enterprise-level systems and large-scale applications.",
+              "Mentors others in architectural best practices and design patterns.",
+              "Sets standards for data models and design across the organization.",
+              "Defines the security principles of the system and regularly conducts security audit. Coaches and mentors engineers in advanced quality and security practices."
+            ]
+          }
+        },
+        {
+          "name": "SOFTWARE DEVELOPMENT",
+          "levels": {
+            "IC2": [
+              "Writes clean, maintainable code with guidance.",
+              "Typically works on on bugs and small independent components for now.",
+              "Proficient in at least one programming language.",
+              "Understands and uses standard algorithms proficiently.",
+              "Uses version control systems effectively (e.g., Git).",
+              "Follows coding standards and best practices.",
+              "Learns to recognize and report technical debt, seeking guidance from more experienced engineers on how to address it within their scope.",
+              "Can use an external library or API following guidance and documentation, ensuring it integrates properly into the codebase."
+            ],
+            "IC3": [
+              "Writes high-quality, efficient, and maintainable code independently.",
+              "Proficient in multiple programming languages and frameworks, able to learn new programming languages in a short period of time if needed.",
+              "Implements features and fixes bugs with minimal supervision.",
+              "Able to design and implement less complex custom algorithms.",
+              "Participates in code reviews and provides constructive feedback.",
+              "Identifies technical debt in the codebase during development and raises it with the team, contributing to discussions on prioritization.",
+              "Able to compare the pros and cons of using external libraries/APIs versus developing in-house solutions, making informed recommendations based on the project requirements."
+            ],
+            "IC4": [
+              "Writes and reviews complex, high-performance code.",
+              "Expert in overall development practices and relevant algorithms and able to implement it in relevant languages.",
+              "Able to evaluate and select the most suitable programming language and technology for the requirements.",
+              "Mentors junior and mid-level engineers in best coding practices.",
+              "Designs and proficiently implements algorithms and larger, more complex features, keeping the wider system architecture in mind.",
+              "Leads code reviews and ensures adherence to coding standards.",
+              "Evaluates and decides when it’s acceptable to incur technical debt based on project timelines and business needs, balancing short-term and long-term trade-offs.",
+              "Contributes to external dependencies by identifying potential improvements, submitting bug fixes, and ensuring the external libraries or APIs are reliable and suitable for long-term use."
+            ],
+            "IC5": [
+              "Drives the development and documentation of coding standards and practices across teams.",
+              "Leaves a lasting impact on engineering practices of the organization.",
+              "Recognized as an authority in software development within the organization. Drives and implements highly complex technical projects with challenging implementations.",
+              "Leads the adoption of new languages, frameworks, and tools. Could design and develop custom framework if needed.",
+              "Coaches and mentors engineers at all levels in software development.",
+              "Defines requirements for algorithms (complexity, efficiency).",
+              "Plans and leads the strategy for managing and reducing technical debt, ensuring technical debt is addressed systematically and aligned with the product roadmap.",
+              "Leads decisions on external dependencies, actively contributing to open-source libraries or APIs and influencing the decision to use or build external solutions."
+            ]
+          }
+        },
+        {
+          "name": "INFRASTRUCTURE & RELIABILITY",
+          "levels": {
+            "IC2": [
+              "Understands basic DevOps principles and practices.",
+              "Familiar user of CI/CD pipelines and basic tools (e.g., Jenkins, GitHub Actions).",
+              "Assists in maintaining development and test environments.",
+              "Understands the basics of containerization (e.g., Docker)."
+            ],
+            "IC3": [
+              "Implements and maintains CI/CD pipelines with minimal guidance.",
+              "Proficient with containerization and orchestration tools (e.g., Docker, Kubernetes).",
+              "Manages development, staging, and production environments with occasional support from more senior colleagues.",
+              "Implements infrastructure as code when applicable (e.g., Terraform, Ansible)."
+            ],
+            "IC4": [
+              "Designs, implements and maintains complex CI/CD pipelines and workflows independently.",
+              "Expert in containerization, orchestration, and infrastructure automation.",
+              "Ensures high reliability and availability of production systems.",
+              "Leads infrastructure scaling and optimization efforts."
+            ],
+            "IC5": [
+              "Defines the DevOps strategy and best practices for the organization.",
+              "Leads the implementation of advanced infrastructure solutions.",
+              "Mentors teams in DevOps practices and tools.",
+              "Ensures the organization’s infrastructure is robust, scalable, and secure."
+            ]
+          }
+        },
+        {
+          "name": "SOFTWARE QUALITY & TESTING",
+          "levels": {
+            "IC2": [
+              "Writes unit and integration tests for their code.",
+              "Familiar with code review processes and tools.",
+              "Participates in testing and debugging sessions."
+            ],
+            "IC3": [
+              "Develops comprehensive test plans and writes extensive tests.",
+              "Conducts code reviews and ensures adherence to quality standards.",
+              "Proficient in using testing frameworks and tools."
+            ],
+            "IC4": [
+              "Defines and enforces testing strategies and standards.",
+              "Leads security reviews and implements advanced security measures.",
+              "Ensures code quality through thorough reviews and automated testing."
+            ],
+            "IC5": [
+              "Sets the overall quality and security standards for the organization.",
+              "Leads initiatives to improve software quality and security practices.",
+              "Drives the adoption of new testing and security tools and methodologies."
+            ]
+          }
+        },
+        {
+          "name": "PRODUCT SENSE & USER-CENTRICITY",
+          "levels": {
+            "IC2": [
+              "Understands basic user requirements and product goals.",
+              "Considers user experience in their code and designs.",
+              "Follows product specifications closely."
+            ],
+            "IC3": [
+              "Collaborates with product managers, product designers to refine requirements.",
+              "Incorporates user feedback into development iterations.",
+              "Designs features with a focus on user experience and usability.",
+              "May participate in user testing and product reviews."
+            ],
+            "IC4": [
+              "Works closely with product managers to define and prioritize features.",
+              "Participates in and contributes to user / client meetings or user feedback sessions around technical topics as needed.",
+              "Advocates for the user in all stages of development.",
+              "Leads user-centric design and development efforts.",
+              "Mentors others in understanding and implementing user-centric practices."
+            ],
+            "IC5": [
+              "Collaborates with senior leadership and product managers to define the technical aspects of product vision and strategy.",
+              "Ensures that user-centric design principles are embedded in the technical architecture and development processes.",
+              "Leads technical initiatives to integrate advanced user feedback mechanisms and data analytics for continuous product improvement.",
+              "Guides teams in implementing technically sound solutions that enhance user experience, such as performance optimization, accessibility improvements, and seamless integrations.",
+              "Mentors engineers on the technical aspects of developing user-friendly features, ensuring technical feasibility while meeting user needs and business objectives."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Management",
+      "sourceSheet": "Product Management",
+      "displayOrder": 2,
+      "competencies": [
+        {
+          "name": "PRODUCT EXECUTION: FEATURE SPECIFICATION",
+          "levels": {
+            "IC2": [
+              "Gathers requirements with basic to medium complexity with guidance from more senior PMs.",
+              "Defines simple functionality based on clear instructions.",
+              "Communicates requirements clearly to the team for straightforward tasks, writes understandable and detailed documentation.",
+              "Relies on templates and predefined formats for specification documents."
+            ],
+            "IC3": [
+              "Independently gathers and refines requirements for moderately complex features, only requires occasional guidance.",
+              "Defines functionality with an understanding of broader product goals.",
+              "Communicates requirements effectively to cross-functional teams.",
+              "Creates specification documents that are clear and actionable with minimal oversight."
+            ],
+            "IC4": [
+              "Leads the gathering of requirements for complex features involving multiple stakeholders.",
+              "Defines functionality that aligns with strategic objectives and user needs.",
+              "Anticipates potential challenges in functionality and sets clear goals to address them.",
+              "Reviews and refines specification documents to ensure they are comprehensive and aligned with product strategy."
+            ],
+            "IC5": [
+              "Oversees the feature specification process for entire product areas or major initiatives.",
+              "Ensures that all requirements and functionalities align with the overall product vision.",
+              "Mentors other PMs in the best practices of feature specification and goal setting.",
+              "Develops and maintains templates and guidelines for feature specifications across the organization."
+            ]
+          },
+          "description": "The ability for a PM to gather requirements, define functionality, and set goals in a clear, actionable format that can be used to communicate with the team and drive product delivery."
+        },
+        {
+          "name": "PRODUCT EXECUTION: PRODUCT DELIVERY",
+          "levels": {
+            "IC2": [
+              "Works closely with immediate team members to deliver small, well-defined product features.",
+              "Follows established processes to ensure timely delivery of tasks.",
+              "Seeks feedback regularly from team members to ensure alignment.",
+              "Contributes to team meetings by providing status updates and addressing blockers."
+            ],
+            "IC3": [
+              "Manages the delivery of more complex product features, coordinating with design, engineering and relevant business functions.",
+              "Identifies and addresses potential delivery risks in advance.",
+              "Uses iterative processes to refine and improve product functionality before launch.",
+              "Provides clear, consistent communication on delivery timelines and progress."
+            ],
+            "IC4": [
+              "Oversees the delivery of major features or initiatives, ensuring alignment with business goals and strategy.",
+              "Balances speed of delivery with quality, making trade-offs when necessary. Coordinates across multiple teams and manages dependencies to ensure smooth delivery.",
+              "Continuously optimizes delivery processes to increase efficiency and reduce bottlenecks."
+            ],
+            "IC5": [
+              "Able to completely own a product and leads the delivery strategy for large-scale projects or entire product lines.",
+              "Ensures that all teams are aligned and working towards the same delivery goals.",
+              "Develops frameworks for rapid and effective product delivery across teams. Acts as the final point of escalation for delivery challenges and removes obstacles."
+            ]
+          },
+          "description": "The ability to work closely with one’s immediate team (engineering, design, etc.) to iteratively and quickly deliver product functionality that accomplishes pre-defined goals."
+        },
+        {
+          "name": "PRODUCT EXECUTION: QUALITY ASSURANCE",
+          "levels": {
+            "IC2": [
+              "Participates in Product QA processes by helping to identify basic quality issues.",
+              "Works with Engineering to understand the impact of defects and bugs.",
+              "Follows up on quality issues under the guidance of more experienced PMs.",
+              "Ensures that simple features meet basic quality standards before release."
+            ],
+            "IC3": [
+              "Prioritizes and resolves quality issues that impact user experience or product functionality.",
+              "Works closely with Engineering teams to define acceptance criteria and test plans.",
+              "Monitors and addresses quality issues across multiple devices and platforms.",
+              "Ensures that the delivered product meets functional, technical, and business quality standards."
+            ],
+            "IC4": [
+              "Leads efforts to maintain high quality across complex product features.",
+              "Anticipates potential quality risks and implements strategies to mitigate them.",
+              "Ensures comprehensive testing across all relevant use cases, devices, and regions. Drives continuous improvement in QA processes together with Engineering, incorporating feedback from previous releases."
+            ],
+            "IC5": [
+              "Defines the quality assurance strategy for entire product areas or major initiatives.",
+              "Ensures that quality is a core focus across the product lifecycle.",
+              "Mentors other PMs in understanding and enforcing quality standards.",
+              "Oversees the implementation of advanced QA techniques and tools to enhance product quality."
+            ]
+          },
+          "description": "The ability to identify, prioritize, and resolve technical, functional, and business quality issues across all devices, countries, and use cases that are applicable to the product."
+        },
+        {
+          "name": "CUSTOMER INSIGHT: FLUENCY WITH DATA",
+          "levels": {
+            "IC2": [
+              "Learns to analyze basic data sets with guidance from senior team members.",
+              "Applies data insights to make suggestions or simple product decisions.",
+              "Tracks and reports on key metrics relevant to their area of responsibility. Uses data to identify trends and provide input on small feature adjustments."
+            ],
+            "IC3": [
+              "Independently analyzes data to generate insights that guide product decisions.",
+              "Uses data to validate assumptions and inform feature prioritization.",
+              "Collaborates with data analysts to refine metrics and reporting methods.",
+              "Makes data-driven recommendations that align with broader product goals."
+            ],
+            "IC4": [
+              "Leads the analysis of complex data sets to inform strategic product decisions.",
+              "Identifies and tracks key metrics that impact product success and business outcomes.",
+              "Uses advanced data techniques to uncover deeper insights and opportunities.",
+              "Mentors less senior PMs in using data effectively to drive product decisions. Educates cross-functional teams about key metrics usage."
+            ],
+            "IC5": [
+              "Defines the data strategy for the product area, ensuring alignment with business objectives.",
+              "Oversees the integration of data insights into the product development process.",
+              "Drives the use of advanced analytics and data science as much as possible within the business context to enhance product performance.",
+              "Leads initiatives to improve data fluency across the product team."
+            ]
+          },
+          "description": "The ability to use data to generate actionable insights, to leverage those insights to achieve goals set for the product, and to connect those quantified goals to meaningful outcomes for the business."
+        },
+        {
+          "name": "CUSTOMER INSIGHT: VOICE OF THE CUSTOMER",
+          "levels": {
+            "IC2": [
+              "Collects user feedback through basic methods, such as surveys and interviews, in collaboration withe more senior members.",
+              "Uses feedback to make small adjustments to product features.",
+              "Participates in user testing sessions and reports findings to the team.",
+              "Learns to understand and empathize with user needs and challenges."
+            ],
+            "IC3": [
+              "Regularly gathers and synthesizes user feedback from multiple sources.",
+              "Translates user insights into actionable product improvements.",
+              "Works with the design and engineering teams to ensure user needs are met.",
+              "Advocates for the customer in product discussions and prioritization."
+            ],
+            "IC4": [
+              "Leads efforts to deeply understand customer needs and pain points.",
+              "Uses customer insights to drive significant product changes and innovations.",
+              "Develops and maintains strong relationships with key user groups, in regular contact with users.",
+              "Mentors other PMs in effectively leveraging the voice of the customer."
+            ],
+            "IC5": [
+              "Defines the strategy for incorporating customer feedback into product development.",
+              "Ensures that the voice of the customer is central to the product vision and strategy.",
+              "Leads initiatives to gather and analyze customer feedback at scale.",
+              "Coaches teams on best practices for understanding and responding to customer needs."
+            ]
+          },
+          "description": "The ability to leverage user feedback in all its forms (from casual conversations to formal studies) to understand how users engage with the product, make better decisions, and drive meaningful outcomes for the business."
+        },
+        {
+          "name": "CUSTOMER INSIGHT: USER EXPERIENCE DESIGN",
+          "levels": {
+            "IC2": [
+              "Works with the design team to understand basic UX principles.",
+              "Contributes to the creation of user flows and wireframes for simple features.",
+              "Provides input on UX designs from a user perspective.",
+              "Follows established UX patterns and best practices in their product area."
+            ],
+            "IC3": [
+              "Collaborates with designers to create user-centric UX designs for more complex features.",
+              "Ensures that UX designs align with user needs and business goals.",
+              "Participates in user testing to validate and refine UX designs.",
+              "Advocates for UX best practices and consistency across the product."
+            ],
+            "IC4": [
+              "Leads the development of UX designs that significantly enhance user satisfaction and engagement.",
+              "Works closely with design colleague(s) to ensure the product meets high UX standards.",
+              "Drives UX innovation in response to user feedback and market trends. Mentors less senior PMs and designers in creating intuitive and effective user experiences."
+            ],
+            "IC5": [
+              "Defines the UX strategy for the product area, ensuring it aligns with the overall product vision.",
+              "Oversees the development and implementation of UX guidelines and patterns.",
+              "Leads initiatives to elevate the overall UX quality across the product portfolio.",
+              "Acts as the key advocate for the user experience within the organization."
+            ]
+          },
+          "description": "The ability, both as an individual and working with the design team, to define requirements and deliver UX designs that are easy to use, leverage UX best practices, and align with the predominant UX patterns present in the product."
+        },
+        {
+          "name": "PRODUCT STRATEGY: BUSINESS OUTCOME OWNERSHIP",
+          "levels": {
+            "IC2": [
+              "Understands the basic connection between product features and business outcomes.",
+              "Contributes to small projects that drive specific business results.",
+              "Tracks progress toward predefined business goals with guidance.",
+              "Learns to connect product decisions to broader business objectives."
+            ],
+            "IC3": [
+              "Independently drives product features that contribute to key business outcomes.",
+              "Aligns feature prioritization with business goals and user needs.",
+              "Monitors and reports on the impact of product changes on business metrics.",
+              "Proactively identifies opportunities to improve business results through product enhancements."
+            ],
+            "IC4": [
+              "Owns the responsibility for driving significant business outcomes through product strategy.",
+              "Aligns the product roadmap with strategic business objectives and user needs.",
+              "Regularly assesses product performance against key business metrics and adjusts strategy as needed.",
+              "Mentors other PMs and cross-functional team members in understanding and achieving business outcomes."
+            ],
+            "IC5": [
+              "Owns and defines the business outcome strategy for the product area, ensuring alignment with the brand's goals.",
+              "Oversees the integration of business objectives into the product development process.",
+              "Leads efforts to measure and optimize the impact of product changes on business results.",
+              "Coaches less senior PMs on how to drive meaningful business outcomes through product management."
+            ]
+          },
+          "description": "The ability to drive meaningful outcomes for the business by connecting product functionality and goals to the strategic objectives of the PM’s team and the company overall."
+        },
+        {
+          "name": "PRODUCT STRATEGY: PRODUCT VISION & ROADMAPPING",
+          "levels": {
+            "IC2": [
+              "Understands the product vision and roadmap.",
+              "Understands the basic principles of product vision and roadmapping.",
+              "Follows the established roadmap and provides input on future enhancements.",
+              "Learns to connect product vision with user needs and business goals."
+            ],
+            "IC3": [
+              "Independently develops and maintains the roadmap for a specific area of the product, aware how it connects to the larger roadmap.",
+              "Aligns the roadmap with the overall product vision and strategic goals.",
+              "Prioritizes features based on user needs, market trends, and business objectives.",
+              "Regularly communicates roadmap updates to cross-functional teams."
+            ],
+            "IC4": [
+              "Owns and leads the development of a compelling product vision that drives long-term success.",
+              "Ensures that the roadmap aligns with strategic objectives and market opportunities, in sync with the brand leadership.",
+              "Balances short-term needs with long-term goals in the roadmap.",
+              "Mentors other PMs in creating and executing effective roadmaps."
+            ],
+            "IC5": [
+              "Defines the overall product vision and roadmap strategy for the product area.",
+              "Ensures that the roadmap reflects both strategic priorities and customer needs.",
+              "Leads efforts to communicate and align the product vision across the organization. Guides less senior PMs in maintaining a flexible and responsive roadmap that adapts to changes."
+            ]
+          },
+          "description": "The ability to define an overall vision for the PM’s area of the product that connects to the strategy for the team and the company. The ability to define a clear roadmap of highly prioritized features and initiatives that deliver against that vision."
+        },
+        {
+          "name": "PRODUCT STRATEGY: MARKET SENSITIVITY",
+          "levels": {
+            "IC2": [
+              "Learns to track basic market trends and competitor activities under guidance.",
+              "Understands the impact of market dynamics on the product's success.",
+              "Participates in market research activities to gather data on industry trends.",
+              "Provides input on small adjustments to the product based on market feedback."
+            ],
+            "IC3": [
+              "Independently monitors and analyzes market trends and competitor movements.",
+              "Uses market insights to influence feature prioritization and product strategy.",
+              "Identifies emerging opportunities and potential risks in the market. Collaborates with marketing and sales teams to align product development with market demands."
+            ],
+            "IC4": [
+              "Leads efforts to stay ahead of market trends and anticipate industry shifts.",
+              "Obtains and uses deep market /domain knowledge to drive product innovation and differentiation.",
+              "Advises the team on strategic adjustments to the product based on market changes. Mentors other PMs on how to effectively incorporate market sensitivity into their product strategy."
+            ],
+            "IC5": [
+              "Defines the market sensitivity strategy for the product area, ensuring alignment with long-term business goals.",
+              "Oversees competitive analysis and market research initiatives that inform the product roadmap.",
+              "Ensures that the product portfolio adapts proactively to shifts in the market landscape.",
+              "Guides the organization in leveraging market insights to maintain a competitive edge."
+            ]
+          },
+          "description": "In an ever-shifting market landscape, being attuned to market trends and competitive dynamics is crucial. Market sensitivity allows product managers to grasp the subtle shifts in consumer behavior, emerging industry trends, and the movements of competitors. This skill involves not only the analysis of quantitative data but also a qualitative understanding of market narratives and user feedback. By staying sensitive to these changes, a product manager can steer the product in directions that capitalize on market opportunities and sidestep potential pitfalls, ensuring the product remains relevant and competitive."
+        },
+        {
+          "name": "PEOPLE: STAKEHOLDER MANAGEMENT & MANAGING UP",
+          "levels": {
+            "IC2": [
+              "Identifies and engages with key stakeholders relevant to their immediate work.",
+              "Communicates updates and gathers feedback from team members and direct supervisors.",
+              "Seeks guidance from senior PMs when managing relationships with higher-level stakeholders.",
+              "Follows established processes for stakeholder communication and reporting. Understands the basic dynamics of stakeholder influence and interests."
+            ],
+            "IC3": [
+              "Independently manages relationships with multiple stakeholders across different teams.",
+              "Proactively engages with stakeholders to align on goals, expectations, and timelines.",
+              "Effectively communicates project status, risks, and needs to senior leadership.",
+              "Balances the interests of different stakeholders while making decisions.",
+              "Ensures that stakeholder feedback is incorporated into product planning and execution."
+            ],
+            "IC4": [
+              "Leads stakeholder management for complex projects involving multiple high-level stakeholders.",
+              "Anticipates stakeholder concerns and proactively addresses them before they escalate.",
+              "Influences senior leadership and decision-makers to gain support for product initiatives. Manages cross-functional alignment, ensuring all stakeholders are informed and aligned on project goals.",
+              "Mentors junior and mid-level PMs on best practices for stakeholder and leadership engagement."
+            ],
+            "IC5": [
+              "Defines the stakeholder management strategy for large-scale initiatives or entire product areas.",
+              "Builds and maintains strong relationships with key executives and external stakeholders.",
+              "Acts as a trusted advisor to senior leadership, shaping strategic decisions and priorities.",
+              "Navigates complex organizational dynamics to secure resources and support for the product. Coaches other PMs on advanced stakeholder and leadership management techniques."
+            ]
+          },
+          "description": "The ability to proactively identify stakeholders impacted by the PM’s area of ownership and to work with those stakeholders to factor their requirements into product decisions."
+        }
+      ]
+    },
+    {
+      "name": "Product Design",
+      "sourceSheet": "Product Design",
+      "displayOrder": 3,
+      "competencies": [
+        {
+          "name": "USER RESEARCH",
+          "levels": {
+            "IC2": [
+              "Understands the value of design research.",
+              "Assists in planning and conducting user interviews.",
+              "Has foundational understanding of how to organize findings and can draw simple insights.",
+              "Contributes to the creation or update of common research communication artifacts such as personas and user journey maps."
+            ],
+            "IC3": [
+              "Able to develop research protocols and discussion guides for different research methods.",
+              "Independently conducts user interviews, contextual inquiries, and participatory design sessions.",
+              "Works with cross-functional teams to inform the design direction based on research insights."
+            ],
+            "IC4": [
+              "Proactively spots the need for conducting research and can lead complex discovery initiatives.",
+              "Draws upon and adapts a comprehensive repertoire of generative user research methods to address diverse business challenges.",
+              "Collaborates with cross-functional leadership to integrate research insights into product roadmaps."
+            ],
+            "IC5": [
+              "Expertly designs and conducts mixed methods research to address complex business questions.",
+              "Defines the user research strategy for large-scale projects or an entire brand.",
+              "Skillfully organizes and optimizes research operations.",
+              "Leads initiatives to advance the organization’s discovery and validation capabilities.",
+              "Establishes ethical guidelines and best practices for research conduct within the organization."
+            ]
+          },
+          "description": "Generative research: foundational research aimed at identifying problems and opportunities, uncovering user needs, behaviors, and motivations."
+        },
+        {
+          "name": "VISION AND DIRECTION",
+          "levels": {
+            "IC2": [
+              "Understands the importance of product vision.",
+              "Aligns their work with product strategy under direction from senior colleagues.",
+              "Participates in brainstorming and ideation sessions with the team.",
+              "Contributes creative ideas.",
+              "Knows and applies design thinking principles."
+            ],
+            "IC3": [
+              "Proactively aligns their work with the broader product direction.",
+              "Generates innovative and context-specific ideas.",
+              "Understands design in relation to business.",
+              "Can communicate future scenarios effectively to immediate team members."
+            ],
+            "IC4": [
+              "Drives initiatives that align with the overall product direction.",
+              "Questions, clarifies, and inspires product aims.",
+              "Able to frame design work into the business and market context.",
+              "Effectively communicates future scenarios to various stakeholders."
+            ],
+            "IC5": [
+              "Develops effective long-term design strategies that align with business objectives, revenue models, and growth opportunities.",
+              "Formulates design visions that inspire the team.",
+              "Influences company/product strategy.",
+              "Communicates complex future scenarios to diverse audiences, including executives.",
+              "Coaches the design team in developing and executing a design vision."
+            ]
+          },
+          "description": "The ability to imagine the future, communicate it to others, and proactively drive towards desirable scenarios."
+        },
+        {
+          "name": "INTERACTION DESIGN",
+          "levels": {
+            "IC2": [
+              "Knows common interaction design patterns and effectively applies them in straightforward contexts.",
+              "Can create basic wireframes and user flows to communicate interaction ideas."
+            ],
+            "IC3": [
+              "Has a solid grasp of micro and macro interactions best practices.",
+              "Can develop moderately complex user flows.",
+              "Identifies interaction issues within specific features or product areas and proposes solutions.",
+              "Creates interaction solutions that consider accessibility requirements."
+            ],
+            "IC4": [
+              "Has deep understanding of industry and platform-specific interaction design practices.",
+              "Identifies and resolves systemic interaction issues.",
+              "Anticipates potential user behaviors and designs appropriate system responses.",
+              "Can develop highly complex user flows and detailed wireframes.",
+              "Articulates and defends interaction design decisions to stakeholders, grounding choices in research and good design principles."
+            ],
+            "IC5": [
+              "Consistently produces interaction design solutions that raise the collective quality bar — in some cases raising the industry bar.",
+              "Anticipates future innovation or trends in interaction design and positions the organization to adapt proactively."
+            ]
+          },
+          "description": "How things work."
+        },
+        {
+          "name": "VISUAL DESIGN",
+          "levels": {
+            "IC2": [
+              "Understands the importance of visual hierarchy and consistency.",
+              "Follows existing visual styleguides.",
+              "References to industry patterns in the absence of an established design language for the product."
+            ],
+            "IC3": [
+              "Has a good understanding of visual design principles in regards to layout, typography, color theory and branding elements.",
+              "Can explain visual design decisions clearly to immediate stakeholders.",
+              "Creates visual solutions that consider accessibility requirements."
+            ],
+            "IC4": [
+              "Has a strong, justified point of view regarding the visual direction of the product.",
+              "Demonstrates holistic thinking in visual design, considering multiple contexts and implications including display modes, cultural associations, accessibility, cross-platform adaptability, and long-term sustainability."
+            ],
+            "IC5": [
+              "Defines the visual strategy for the product.",
+              "Oversees the product’s visual identity and ensure its consistently applied across all touchpoints.",
+              "Leads initiatives to elevate the visual design quality across the organization."
+            ]
+          },
+          "description": "How things look."
+        },
+        {
+          "name": "INFORMATION ARCHITECTURE",
+          "levels": {
+            "IC2": [
+              "Understands basic information architecture principles and concepts.",
+              "Can create simple site maps, define basic navigation structures, and assist in content inventories and audits."
+            ],
+            "IC3": [
+              "Develops clear and logical information structures for moderately complex scenarios.",
+              "Applies appropriate navigation patterns based on user needs and platform conventions.",
+              "Familiar with card sorting, tree testing, and other common methods."
+            ],
+            "IC4": [
+              "Develops information architecture strategies that align with long-term product vision and user needs.",
+              "Knows a variety of methods to assess information architecture effectiveness, and can advise others on when to use them.",
+              "Identifies and resolves systemic information architecture issues.",
+              "Articulates and defends information architecture decisions to diverse stakeholders."
+            ],
+            "IC5": [
+              "Shapes the overall information architecture strategy and vision for the organization.",
+              "Develops intuitive taxonomies that align with user mental models.",
+              "Creates guidelines for content structuring, labeling, and messaging across products.",
+              "Establishes processes for maintaining and evolving information architecture structures over time."
+            ]
+          },
+          "description": "How information is arranged."
+        },
+        {
+          "name": "DESIGN SYSTEMS",
+          "levels": {
+            "IC2": [
+              "Understand the importance of scalability and consistency of design elements.",
+              "Can correctly interpret and apply existing guidelines.",
+              "Makes frequent and appropriate use of existing Figma library components."
+            ],
+            "IC3": [
+              "Participates in maintaining and updating design system documentation.",
+              "Able to contribute new components with some guidance.",
+              "Advocates for the adoption of design standards within their immediate team."
+            ],
+            "IC4": [
+              "Has a comprehensive understanding of what constitutes a design system.",
+              "Able to independently develop new components and patterns, or to create a design system from scratch.",
+              "Can confidently decide when it is sensible to deviate from existing patterns, balancing system consistency with specific product needs and experience goals.",
+              "Advocates for and guides the adoption of design systems across the organization."
+            ],
+            "IC5": [
+              "Defines the design system strategy, including the governance model, and aligning with product and brand goals.",
+              "Leads initiatives to advance the design system’s impact on product quality and efficiency.",
+              "Coaches the design team in best practices for developing and applying design systems."
+            ]
+          },
+          "description": "How design is organized and scaled."
+        },
+        {
+          "name": "FACILITATION AND COACHING",
+          "levels": {
+            "IC2": [
+              "Participates in and assists design workshops.",
+              "Practices active listening and clear communication in team settings.",
+              "Actively seeks guidance and feedback from senior colleagues to develop/improve their facilitation skills."
+            ],
+            "IC3": [
+              "Independently leads small design workshops, following established formats.",
+              "Able to draw upon knowledge of a few different facilitation techniques to drive creative problem solving, ensure stakeholders' alignment, and reconcile diverging needs and opinions."
+            ],
+            "IC4": [
+              "Proactively plans and leads design workshops with clarity, adapting formats as necessary.",
+              "Guides stakeholders through difficult decisions and trade-offs.",
+              "Correctly identifies and involves relevant stakeholders for each activity."
+            ],
+            "IC5": [
+              "Leads initiatives, education and training to improve the design team’s facilitation and collaboration practices.",
+              "Acts as a mentor and coach for others, guiding them in their professional development."
+            ]
+          },
+          "description": "The ability to identify, guide and assist stakeholders in navigating complexity, ensuring alignment, and reaching valuable outcomes."
+        },
+        {
+          "name": "PROTOTYPING",
+          "levels": {
+            "IC2": [
+              "Helps mock up rough concepts and puts together simple interactive prototypes.",
+              "Understands basic prototyping tools and when to use them."
+            ],
+            "IC3": [
+              "Can create interactive prototypes of moderate complexity at different fidelity levels.",
+              "Uses prototypes effectively to validate own design hypotheses."
+            ],
+            "IC4": [
+              "Prototypes with intentionality and knows when to resort to the creation of different types of prototypes.",
+              "Can create high fidelity and complex interactive prototypes if necessary, but favors quicker, lower effort prototypes when sufficient."
+            ],
+            "IC5": [
+              "Creates prototypes that help making business decisions.",
+              "Coaches the team in using prototypes to push product innovation and validate design decisions.",
+              "Leads initiatives to elevate prototyping practices across the whole organization."
+            ]
+          },
+          "description": "The ability to bring a concept to life so that a hypothesis can be tested in a short amount of time."
+        },
+        {
+          "name": "DATA LITERACY",
+          "levels": {
+            "IC2": [
+              "Understands basic types of data and statistical concepts (e.g., averages, percentages, trends).",
+              "Can interpret simple charts and graphs.",
+              "Has foundational knowledge of how common design metrics relate to user behavior and can use this to recognize when data suggests a design solution is or isn't meeting its intended goals."
+            ],
+            "IC3": [
+              "Uses insights derived form data to inform design decisions for specific features.",
+              "Collaborates with data analysts to gather relevant insights.",
+              "Understands the limitations of data and potential biases in interpretation."
+            ],
+            "IC4": [
+              "Develops data-informed strategies and solutions for complex challenges.",
+              "Identifies and defines key design metrics that align with business goals.",
+              "Synthesizes insights from multiple data sources to inform design directions.",
+              "Can use analytics tools.",
+              "Able to articulate the impact of design decisions using quantitative evidence."
+            ],
+            "IC5": [
+              "Develops frameworks for measuring and optimizing design impact.",
+              "Coaches the team in leveraging data to make informed product design decisions.",
+              "Advocates for user rights and transparency in how data influences product decisions, and facilitates internal discussions on emerging ethical challenges in data and design."
+            ]
+          },
+          "description": "The ability to understand and work with data in order to derive evidence-based decisions."
+        }
+      ]
+    },
+    {
+      "name": "Customer Support",
+      "sourceSheet": "Customer Support",
+      "displayOrder": 4,
+      "competencies": [
+        {
+          "name": "KNOWLEDGE & EXPERTISE",
+          "levels": {
+            "IC2": [
+              "Basic understanding of technical concepts and company-specific tech. Able to follow troubleshooting guides. Developing problem-solving skills.",
+              "Basic familiarity with common support tools. Learning to use automation features. Developing awareness of product and industry basics.",
+              "Basic understanding of core product features. Familiar with basic product documentation. Relates product knowledge to simple customer inquiries.",
+              "Follows established processes. Uses existing documentation. Suggests minor improvements to team leads."
+            ],
+            "IC3": [
+              "Confidently navigates technical language and concepts. Independently diagnoses common issues. Applies analytical skills to solve routine problems.",
+              "Proficient with support ticketing tools. Regularly uses automation to improve efficiency. Keeps informed about key product and industry trends.",
+              "Comprehensive knowledge of product functionality. Contributes to documentation. Effectively applies product expertise to enhance customer experience.",
+              "Contributes to process documentation. Implements small-scale improvements. Refines existing knowledge base articles."
+            ],
+            "IC4": [
+              "Deep technical knowledge. Expertly analyzes complex data and logs. Develops advanced troubleshooting methods for challenging issues, develops workarounds.",
+              "Expert in multiple support tools. Implements advanced automation strategies. Actively follows and applies industry trends to improve processes.",
+              "In-depth understanding of product intricacies. Creates and updates key documentation. Proactively identifies product-related issues affecting customers.",
+              "Owning in-product support items (if there are any).",
+              "Creates comprehensive internal documentation. Leads significant process improvements. Develops effective escalation/communication strategies."
+            ],
+            "IC5": [
+              "Comprehensive mastery of all technical aspects. Drives improvements in diagnostics and problem-solving approaches. Go-to resource for complex technical challenges.",
+              "Drives tool selection and optimization. Pioneers innovative automation solutions. Recognized authority on industry trends, influencing company strategy.",
+              "Internal product expert. Oversees documentation strategy. Bridges product knowledge and customer experience to influence product development.",
+              "Defines and optimizes support processes. Architects knowledge base structure. Drives strategic improvements across support functions."
+            ]
+          }
+        },
+        {
+          "name": "DELIVERY / ISSUE RESOLUTION",
+          "levels": {
+            "IC2": [
+              "Resolves basic customer issues with guidance. Meets basic KPIs. Developing problem-solving skills for common requests.",
+              "Recognizes when to escalate issues. Learns basic de-escalation techniques. Follows established escalation procedures."
+            ],
+            "IC3": [
+              "Independently resolves most customer requests. Consistently meets KPIs. Applies creative solutions to recurring issues.",
+              "Manages most escalations independently. Effectively de-escalates moderate customer issues. Knows when to involve higher-level support."
+            ],
+            "IC4": [
+              "Expertly handles complex customer issues. Exceeds KPIs regularly. Innovates new approaches to challenging problems. Owning the whole ticket cycle of the reported issue.",
+              "Handles complex escalations skillfully. Expert at de-escalating difficult situations. Guides others in escalation management."
+            ],
+            "IC5": [
+              "Resolves most critical and escalated issues. Sets and optimizes KPI standards. Drives innovative troubleshooting strategies across the team.",
+              "Resolves critical escalations across the organization. Develops escalation strategies and training. Sets standards for handling high-stakes situations."
+            ]
+          }
+        },
+        {
+          "name": "COLLABORATION",
+          "levels": {
+            "IC2": [
+              "Communicates basic information clearly. Developing customer-centric approach. Writes simple, helpful responses with guidance.",
+              "Contributes to basic FAQs. Creates simple resources like product How-Tos and functionality demonstrations under supervision. Understands importance of documentation.",
+              "Participates in team discussions. Shares basic customer feedback. Assists with simple onboarding tasks when asked."
+            ],
+            "IC3": [
+              "Explains moderate technical concepts effectively. Demonstrates empathy in customer interactions. Crafts clear, concise responses independently.",
+              "Writes clear feature documentation and FAQs to be reviewed by more senior team members. Produces useful how-to videos and GIFs independently. Identifies documentation gaps.",
+              "Contributes to team training. Actively supports new team member onboarding. Regularly shares relevant customer feedback."
+            ],
+            "IC4": [
+              "Breaks down complex information expertly. Builds strong customer relationships. Communicates with high empathy and clarity in all situations.",
+              "Develops comprehensive external documentation independently. Creates high-quality, diverse resources. Implements documentation best practices.",
+              "Develops and delivers team training. Takes lead in onboarding new members. Analyzes and presents customer feedback trends. Collaborates closely with other teams to identify and develop support solutions and new product features."
+            ],
+            "IC5": [
+              "Sets communication standards for the team. Mentors others in customer-centric communication. Develops strategies for building lasting customer relationships.",
+              "Oversees documentation strategy. Innovates new approaches to resource creation. Ensures documentation aligns with product and customer needs.",
+              "Designs comprehensive training programs. Oversees team onboarding strategies. Drives improvements based on customer feedback across departments."
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marketing",
+      "sourceSheet": "Marketing",
+      "displayOrder": 5,
+      "competencies": [
+        {
+          "name": "MARKETING STRATEGY & BUSINESS INTEGRATION",
+          "levels": {
+            "IC2": [
+              "Understands product value proposition and ICP",
+              "Executes predefined GTM plans",
+              "Contributes research insights",
+              "Learns SaaS metrics (CAC, LTV, funnel stages)"
+            ],
+            "IC3": [
+              "Contributes to GTM planning with structured input, not just opinions",
+              "Maps segments and buyer journeys and documents assumptions clearly",
+              "Aligns messaging with releases and updates positioning docs accordingly",
+              "Owns smaller GTM initiatives end-to-end (plan → execute → measure → share learnings)",
+              "Demonstrates working knowledge of CAC/LTV and revenue motions",
+              "Maintains lightweight competitive tracking and surfaces insights proactively"
+            ],
+            "IC4": [
+              "Designs end-to-end GTM strategies for product/feature rollouts.",
+              "Connects initiatives explicitly to revenue outcomes and payback logic",
+              "Prioritizes initiatives based on ROI, effort, and opportunity size — kills weak bets early",
+              "Owns positioning and differentiation narrative within their domain",
+              "Aligns XFN stakeholders through clear documentation and async communication"
+            ],
+            "IC5": [
+              "Creates and owns strategic GTM playbooks across regions.",
+              "Advises executives on market-entry decisions.",
+              "Aligns brand, product, and revenue strategies.",
+              "Analyzes GTM performance and refines org-wide strategy.",
+              "Leads cross-functional strategy rituals and OKRs.",
+              "Shapes and scales PLG- and/or SLG-driven acquisition and retention frameworks, including long-term demand generation strategy",
+              "Oversees marketing budgets including planning and tracking"
+            ]
+          },
+          "description": "Ability to design, document, and evolve marketing strategy that connects product positioning, customer segments, and revenue model. Translates business goals into clear GTM direction, competitive differentiation, and prioritized investment decisions."
+        },
+        {
+          "name": "LEAD GENERATION & FUNNEL OPTIMIZATION",
+          "levels": {
+            "IC2": [
+              "Executes campaigns using playbooks",
+              "Tracks core funnel metrics (CVR, MQLs)",
+              "Learns qualification logic",
+              "Assists with lead list building and outreach."
+            ],
+            "IC3": [
+              "Designs channel-level lead capture strategies with documented hypotheses",
+              "Runs structured experiments with defined success criteria",
+              "Improves funnel stages using directional data when attribution is imperfect",
+              "Understands attribution limitations and communicates confidence levels",
+              "Shares experiment learnings with broader marketing community"
+            ],
+            "IC4": [
+              "Owns pipeline targets for segment or product and forecasts impact",
+              "Designs multi-channel experimentation roadmap tied to business goals",
+              "Optimizes CAC, CVR, and activation metrics using structured test frameworks",
+              "Aligns closely with Sales/RevOps and documents funnel logic clearly",
+              "Stops or reworks underperforming funnel components decisively"
+            ],
+            "IC5": [
+              "Sets pipeline generation targets for marketing org",
+              "Designs full-funnel experimentation frameworks used across teams",
+              "Integrates product usage and behavioral signals into qualification logic",
+              "Elevates experimentation standards and documentation quality across brands",
+              "Partners with leadership on growth forecasting and scenario modeling"
+            ]
+          },
+          "description": "Driving demand and converting it into MQLs through CRO, landing page testing, outreach, and funnel optimization."
+        },
+        {
+          "name": "ACQUISITION & GROWTH CHANNELS",
+          "levels": {
+            "IC2": [
+              "Supports campaign setup and KPI tracking",
+              "Understands channel economics (CPC, CTR, CVR)"
+            ],
+            "IC3": [
+              "Owns execution of specific channels with clear budget awareness",
+              "Tracks CAC, payback, ROAS and explains performance trade-offs",
+              "Tests creatives and targeting systematically, not randomly",
+              "Documents channel insights and shares patterns across brands"
+            ],
+            "IC4": [
+              "Develops cross-channel acquisition strategy tied to marginal return logic",
+              "Owns budget forecasting and scaling decisions",
+              "Evaluates diminishing returns and reallocates capital accordingly",
+              "Manages agencies/partners with performance accountability",
+              "Defends brand campaigns strategically and avoids blended metric confusion"
+            ],
+            "IC5": [
+              "Defines long-term growth investment strategy at brand or portfolio level",
+              "Partners with leadership on profitability and capital allocation modeling",
+              "Establishes experimentation and funding standards for acquisition",
+              "Guides when to scale, hold, or exit channels based on portfolio logic",
+              "Mentors others in channel economics and capital efficiency thinking"
+            ]
+          },
+          "description": "Deep understanding and management of paid channels, acquisition tactics, and digital advertising."
+        },
+        {
+          "name": "CONTENT, SEO & DEMAND ENGINE",
+          "levels": {
+            "IC2": [
+              "Produces optimized content using briefs and AI assistance",
+              "Applies SEO guidelines",
+              "Conducts keyword research"
+            ],
+            "IC3": [
+              "Owns content for persona or funnel stage and maintains editorial roadmap",
+              "Documents messaging pillars and aligns with positioning",
+              "Conducts SEO/AEO audits with guidance and updates based on findings",
+              "Tracks organic performance and AI visibility trends",
+              "Repurposes and distributes content intentionally, not passively"
+            ],
+            "IC4": [
+              "Designs long-term content and organic growth strategy aligned to demand and product",
+              "Builds scalable content systems (briefing, review, distribution, refresh cycles)",
+              "Connects content performance to pipeline impact",
+              "Maintains competitive content tracking",
+              "Ensures AI-assisted content meets brand, factual, and quality standards"
+            ],
+            "IC5": [
+              "Defines brand messaging architecture and narrative authority",
+              "Establishes scalable content engine (people, process, AI) across brands/channels",
+              "Owns SEO/AEO targets and authority-building roadmap",
+              "Shapes category positioning through thought leadership and strategic distribution",
+              "Sets quality bar for AI-assisted content and editorial standards portfolio-wide"
+            ]
+          },
+          "description": "Planning, producing, optimizing, and distributing content for brand, SEO, and demand generation."
+        },
+        {
+          "name": "ANALYTICS, ATTRIBUTION & SAAS METRICS",
+          "levels": {
+            "IC2": [
+              "Builds basic reports",
+              "Understands CAC, LTV, MQL, SQL definitions",
+              "Learns attribution basics"
+            ],
+            "IC3": [
+              "Builds structured dashboards and explains key drivers, not just numbers",
+              "Analyzes CAC/LTV by segment and identifies funnel friction",
+              "Communicates insights clearly in async updates",
+              "Uses proxy metrics confidently when attribution is incomplete",
+              "Flags data inconsistencies proactively"
+            ],
+            "IC4": [
+              "Develops performance frameworks across channels and lifecycle stages",
+              "Connects marketing, product, and sales data into coherent narratives",
+              "Leads reporting rituals with clear recommendations, not raw dashboards",
+              "Improves tracking quality and attribution clarity over time",
+              "Makes data-backed prioritization decisions with documented trade-offs"
+            ],
+            "IC5": [
+              "Defines metrics taxonomy and analytics standards across team(s)",
+              "Leads growth modeling and scenario planning (LTV, payback, marginal ROI)",
+              "Guides investment decisions using structured financial logic",
+              "Elevates data literacy across teams",
+              "Ensures clean, reliable, privacy-compliant data operations"
+            ]
+          },
+          "description": "Ability to analyze marketing performance, track KPIs (e.g., CAC, LTV), and drive insights with attribution and reporting."
+        },
+        {
+          "name": "MARKETING AUTOMATION, AI & OPERATIONS",
+          "levels": {
+            "IC2": [
+              "Uses CRM/CMS tools",
+              "Applies AI for assistance (drafting, research, summaries)",
+              "Understands workflow basics"
+            ],
+            "IC3": [
+              "Designs multi-step automation workflows and documents logic clearly",
+              "Uses AI to improve speed, quality, and research depth — not to shortcut thinking",
+              "Integrates tools via APIs/Zapier/n8n with structured testing",
+              "Maintains roadmap visibility and operational hygiene",
+              "Shares useful AI workflows with marketing community",
+              "Understands general web technologies (e.g. cookies, urls, apis, webhooks)"
+            ],
+            "IC4": [
+              "Designs AI-assisted systems that reduce manual work and increase leverage",
+              "Owns lifecycle automation tied to user behavior and product signals",
+              "Maintains structured marketing roadmap, budget tracking, and system documentation",
+              "Connects marketing stack across CRM, analytics, and support tools",
+              "Trains team members in tooling best practices and AI guardrails",
+              "Reduces structural inefficiencies and dependency on manual execution"
+            ],
+            "IC5": [
+              "Defines marketing automation architecture and AI roadmap",
+              "Implements scalable systems (predictive scoring, intent modeling, personalization engines) usable across the portfolio",
+              "Standardizes tooling decisions and operational frameworks",
+              "Drives AI adoption and capability uplift across marketing teams"
+            ]
+          },
+          "description": "Proficiency in marketing tools, automation workflows, AI utilization and operational systems that scale efficiency."
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "sourceSheet": "Sales",
+      "displayOrder": 6,
+      "competencies": [
+        {
+          "name": "PROSPECTING AND LEAD GENERATION",
+          "levels": {
+            "IC2": [
+              "Executes prospecting tasks using predefined lists and scripts.",
+              "Learns to use CRM tools and outreach templates.",
+              "Requires guidance in identifying good-fit leads.",
+              "Participates in basic list building and lead enrichment tasks."
+            ],
+            "IC3": [
+              "Independently researches and qualifies leads using various sources (LinkedIn, intent tools, inbound leads).",
+              "Writes tailored outreach messages based on persona and company context.",
+              "Maintains a consistent prospecting cadence and lead pipeline.",
+              "Begins experimenting with different messaging and A/B testing."
+            ],
+            "IC4": [
+              "Designs and executes prospecting strategies for specific segments or regions.",
+              "Coaches others on outreach methods and messaging personalization.",
+              "Uses AI tools and automation to optimize prospecting efficiency.",
+              "Aligns prospecting with marketing campaigns and buyer intent signals."
+            ],
+            "IC5": [
+              "Develops organization-wide prospecting playbooks.",
+              "Partners with marketing and product to define ICP and outbound strategies.",
+              "Pilots and implements new prospecting tools and sourcing platforms.",
+              "Defines success metrics and continuously improves top-of-funnel performance."
+            ]
+          },
+          "description": "Identifying and qualifying potential customers through research, outreach, and discovery. Managing lead pipelines effectively, ensuring consistent prospecting efforts to generate new opportunities. Developing personalized outreach strategies using tools like CRM platforms, email campaigns, and cold calling."
+        },
+        {
+          "name": "GRIT AND RESILIENCE",
+          "levels": {
+            "IC2": [
+              "Maintains motivation despite rejection and repetitive outreach.",
+              "Seeks help and feedback when struggling.",
+              "Demonstrates consistent effort across tasks.",
+              "Learns to bounce back from lost deals or objections"
+            ],
+            "IC3": [
+              "Handles setbacks constructively and keeps focus on goals.",
+              "Maintains momentum during slow periods or missed targets.",
+              "Supports peers through shared challenges.",
+              "Builds mental routines to manage pressure and stay energized."
+            ],
+            "IC4": [
+              "Acts as a role model for resilience and consistency.",
+              "Helps team reframe failure into learning.",
+              "Shares personal experiences to normalize setbacks.",
+              "Identifies burnout risk in self and others and takes action."
+            ],
+            "IC5": [
+              "Creates an environment that supports long-term resilience.",
+              "Builds structures that prevent overwork and burnout.",
+              "Recognizes systemic causes of team fatigue and mitigates them.",
+              "Champions perseverance and positivity across the org."
+            ]
+          },
+          "description": "The ability to stay motivated, persistent, and focused despite challenges, rejections, or setbacks. Stamina, adaptability, persistence, ability to restart after setbacks, maintaining a positive outlook."
+        },
+        {
+          "name": "INTERPERSONAL SKILLS",
+          "levels": {
+            "IC2": [
+              "Communicates clearly and professionally.",
+              "Practices active listening in calls.",
+              "Learns to read emotional cues and respond with empathy.",
+              "Basic rapport-building."
+            ],
+            "IC3": [
+              "Tailors communication to different buyer personas and situations.",
+              "Navigates complex conversations with tact.",
+              "Provides clear written follow-ups.",
+              "Builds empathy into messaging."
+            ],
+            "IC4": [
+              "Leads nuanced sales conversations involving multiple stakeholders.",
+              "Coaches others on emotional intelligence and objection handling.",
+              "Handles conflict or ambiguity diplomatically.",
+              "Adjusts communication for executive audiences."
+            ],
+            "IC5": [
+              "Sets the standard for interpersonal excellence across the team.",
+              "Represents the company in executive-level meetings.",
+              "Trains others in advanced listening, storytelling, and influencing.",
+              "Resolves systemic communication gaps across functions."
+            ]
+          },
+          "description": "The ability to actively listen, understand, and empathize with customers while conveying information clearly and effectively. Active listening, emotional intelligence, empathy, verbal and written communication, and clarity in messaging."
+        },
+        {
+          "name": "PRODUCT AND INDUSTRY KNOWLEDGE",
+          "levels": {
+            "IC2": [
+              "Understands basic product features and positioning.",
+              "Learns industry terminology and major competitors.",
+              "Answers common product-related questions.",
+              "Refers complex inquiries to senior team members."
+            ],
+            "IC3": [
+              "Explains product value in depth and context.",
+              "Stays informed on market trends and competitive shifts.",
+              "Tailors messaging to align with buyer needs.",
+              "Handles objections with product insight."
+            ],
+            "IC4": [
+              "Anticipates customer objections using deep product/market knowledge.",
+              "Advises clients on how product solves strategic pain points.",
+              "Tracks competitor shifts and adapts sales narratives.",
+              "Supports product feedback loops."
+            ],
+            "IC5": [
+              "Shapes market intelligence strategy.",
+              "Collaborates with product on roadmap insights from the field.",
+              "Trains the team on advanced positioning.",
+              "Represents marketing/product externally."
+            ]
+          },
+          "description": "Deep understanding of the company’s product or service and the industry landscape to position solutions effectively. Product features, benefits, and limitations; competitor analysis; market trends; and regulatory considerations."
+        },
+        {
+          "name": "RELATIONSHIP BUILDING",
+          "levels": {
+            "IC2": [
+              "Builds rapport with prospects and clients during early-stage conversations.",
+              "Follows up reliably and communicates respectfully.",
+              "Gains initial trust by showing consistency.",
+              "Engages in surface-level relationship maintenance."
+            ],
+            "IC3": [
+              "Develops trust with clients across the sales cycle.",
+              "Maintains consistent engagement post-sale and across multiple contacts.",
+              "Identifies stakeholders and nurtures ongoing relationships.",
+              "Strengthens long-term trust with key accounts."
+            ],
+            "IC4": [
+              "Cultivates long-term strategic relationships.",
+              "Becomes a trusted advisor.",
+              "Supports key account growth through deep rapport and trust.",
+              "Manages multiple stakeholders in the buying process."
+            ],
+            "IC5": [
+              "Manages high-value executive relationships.",
+              "Enables team-wide relationship-building strategies.",
+              "Shapes account-based relationship playbooks.",
+              "Supports cross-functional collaboration with customer success/product."
+            ]
+          },
+          "description": "Building trust and long-term relationships with customers, stakeholders, and internal teams to enhance collaboration and loyalty. Trust-building, networking, persuasion, customer engagement, and fostering strong interpersonal connections."
+        },
+        {
+          "name": "SALES STRATEGY AND FUNNEL MANAGEMENT",
+          "levels": {
+            "IC2": [
+              "Learns to use the CRM to track leads and follow a guided sales process.",
+              "Understands basics of qualification and sales stages.",
+              "Applies qualification frameworks like BANT with support.",
+              "Relies on manager guidance to prioritize pipeline activities."
+            ],
+            "IC3": [
+              "Manages full sales cycle with limited supervision.",
+              "Applies BANT or similar frameworks to qualify leads.",
+              "Prioritizes pipeline based on potential and timing.",
+              "Forecasts individual performance with reasonable accuracy."
+            ],
+            "IC4": [
+              "Oversees large or complex pipelines and guides team members on pipeline strategy.",
+              "Analyzes conversion rates at each funnel stage and suggests improvements.",
+              "Integrates AI tools to monitor funnel health and opportunity scoring.",
+              "Collaborates with RevOps to improve reporting and dashboards."
+            ],
+            "IC5": [
+              "Develops and implements scalable funnel management strategies across teams.",
+              "Aligns funnel performance with company-level revenue goals.",
+              "Leads cross-functional efforts to shorten sales cycles and increase win rates.",
+              "Standardizes definitions for funnel stages and forecasting across regions or brands."
+            ]
+          },
+          "description": "The ability to strategically manage leads through the sales funnel by identifying customer pain points, prioritizing opportunities, and timing engagement effectively. Understanding customer needs, timing, qualification (budget, authority, needs, and timing), pushing leads through the funnel, and knowing when to stop investing in unqualified leads. Can also include using AI for funnel management."
+        },
+        {
+          "name": "BUSINESS ACUMEN",
+          "levels": {
+            "IC2": [
+              "Understands basic customer types and use cases.",
+              "Learns to link product features to simple customer problems.",
+              "Understands core metrics like CAC and ARR.",
+              "Follows account plans created by others."
+            ],
+            "IC3": [
+              "Connects customer pain points to broader business goals.",
+              "Understands customer buying processes and budgeting cycles.",
+              "Applies value-based selling.",
+              "Develops basic business cases to support deals."
+            ],
+            "IC4": [
+              "Advises on how the solution impacts customer KPIs and ROI.",
+              "Understands organizational dynamics, procurement, and financial models.",
+              "Articulates strategic value to senior decision-makers.",
+              "Coaches others on commercial acumen."
+            ],
+            "IC5": [
+              "Provides strategic guidance to internal teams and customers.",
+              "Shapes value messaging across segments.",
+              "Brings business insight to pricing, packaging, and GTM strategy.",
+              "Collaborates with leadership on commercial forecasting."
+            ]
+          },
+          "description": "The ability to understand business contexts, customer goals, and the financial and operational implications of sales decisions. Understanding customer business models, ROI-driven selling, market positioning, and aligning solutions with customer goals."
+        },
+        {
+          "name": "NEGOTIATION AND INFLUENCE",
+          "levels": {
+            "IC2": [
+              "Participates in deal closing led by others.",
+              "Observes negotiation techniques.",
+              "Handles basic objections with guidance.",
+              "Learns to balance customer needs and internal goals."
+            ],
+            "IC3": [
+              "Leads negotiations with moderate complexity.",
+              "Balances pricing, value, and relationship.",
+              "Navigates stakeholder dynamics.",
+              "Closes mid-sized deals independently."
+            ],
+            "IC4": [
+              "Handles strategic, multi-party negotiations.",
+              "Identifies key levers and crafts win-win outcomes.",
+              "Coaches others on advanced techniques.",
+              "Develops negotiation plans and custom playbooks."
+            ],
+            "IC5": [
+              "Sets negotiation strategy for large deals or enterprise.",
+              "Builds tools, playbooks, and training on negotiation best practices.",
+              "Involved in strategic deal reviews.",
+              "Influences pricing and packaging decisions."
+            ]
+          },
+          "description": "The skill of navigating discussions to achieve mutually beneficial outcomes while building bridges and maintaining strong relationships. Understanding levers (e.g., data, power dynamics, relationships), creating value, persuasion, and closing deals."
+        },
+        {
+          "name": "PROBLEM SOLVING AND CRITICAL THINKING",
+          "levels": {
+            "IC2": [
+              "Identifies straightforward issues in the sales process and asks for help.",
+              "Learns structured approaches to problem-solving.",
+              "Participates in team discussions on blocked deals.",
+              "Applies guidance to unblock simple obstacles."
+            ],
+            "IC3": [
+              "Anticipates roadblocks and proactively suggests solutions.",
+              "Adapts sales tactics based on deal-specific challenges.",
+              "Devises alternative approaches to move stalled opportunities.",
+              "Escalates thoughtfully with context."
+            ],
+            "IC4": [
+              "Leads problem-solving in complex or uncertain deal scenarios.",
+              "Helps teams navigate stalled deals or customer objections.",
+              "Analyzes trends across deals to refine playbooks.",
+              "Creates tools to help others overcome blockers."
+            ],
+            "IC5": [
+              "Drives systemic problem-solving across sales ops, enablement, and GTM.",
+              "Builds scalable frameworks for reps to apply critical thinking.",
+              "Resolves root causes of systemic performance gaps.",
+              "Aligns problem-solving with strategic sales planning."
+            ]
+          },
+          "description": "The capacity to analyze challenges, identify solutions, and tailor approaches to meet customer needs or overcome obstacles and objections in the sales process. Creative thinking, decision-making, troubleshooting, and solution-oriented approaches."
+        }
+      ]
+    },
+    {
+      "name": "Talent Acquisition",
+      "sourceSheet": "Talent Acq.",
+      "displayOrder": 7,
+      "competencies": [
+        {
+          "name": "End-to-End Hiring Process Ownership",
+          "levels": {
+            "IC2": [
+              "Assists with the hiring process for standard roles, participating in initial scoping and setup under guidance from a senior team member.",
+              "Conducts initial screenings and basic assessments for candidates, escalating complex decisions to senior team members.",
+              "Supports offer and closing processes by handling administrative tasks and coordinating communication, with oversight from a senior recruiter.",
+              "Maintains time-to-fill goals and other metrics as guided, focusing on efficiency while learning quality-of-hire standards."
+            ],
+            "IC3": [
+              "Independently manages recruitment for standard and moderately complex roles, from scoping to offer negotiation.",
+              "Sets up and refines scorecards, competencies, and selection criteria to ensure a structured, unbiased process.",
+              "Balances efficiency and quality, continuously tracking and improving metrics like time-to-fill and quality of hire.",
+              "Confidently handles the closing and offer stage, working to align with both candidate expectations and company standards."
+            ],
+            "IC4": [
+              "Leads end-to-end hiring for complex or high-impact roles, refining processes and ensuring clear alignment with hiring managers and panel members.",
+              "Actively manages metrics like time-to-fill and quality of hire, initiating improvements to streamline the process.",
+              "Takes full responsibility for offer negotiation and closing, maintaining a strong focus on candidate experience.",
+              "Coaches mid-level recruiters on best practices in candidate assessment and offer management to ensure process consistency.",
+              "Meets hiring targets in terms of volume and quality."
+            ],
+            "IC5": [
+              "Sets organizational hiring standards, creating and optimizing frameworks for consistent and high-quality hiring processes across teams.",
+              "Oversees complex and niche hiring needs, mentoring others on refining the hiring process, providing guidance on efficient, scalable recruitment methods.",
+              "Establishes frameworks for efficient closing and offer management practices, ensuring implementation and consistency across the team.",
+              "Establishes and monitors process metrics (e.g., time-to-hire, candidate satisfaction) to assess effectiveness organization-wide.",
+              "Develops strategies for optimizing hiring speed and quality, supporting high-priority hiring initiatives across functions."
+            ]
+          },
+          "description": "Managing the entire recruitment lifecycle, from scoping and kickoff through candidate assessment, debriefs, and offer management. Success in this area requires balancing speed, quality of hire, and candidate experience. Effective recruiters take ownership of optimizing time-to-fill and maintain strong alignment with hiring needs."
+        },
+        {
+          "name": "Candidate Management and Candidate Experience",
+          "levels": {
+            "IC2": [
+              "Communicates with candidates in a timely and professional manner, ensuring a positive candidate experience through each stage of the process.",
+              "Handles basic candidate questions and escalates any complex issues to more experienced team members.",
+              "Assists with candidate feedback collection and provides updates to candidates on their application status with clear guidance from senior recruiters.",
+              "Learns best practices in candidate experience, focusing on empathetic, transparent communication."
+            ],
+            "IC3": [
+              "Maintains timely, professional, and empathetic communication with candidates, ensuring a positive experience throughout the recruitment process.",
+              "Manages candidate expectations, responds promptly to queries, and provides feedback with guidance on best practices.",
+              "Supports candidate engagement by clearly communicating the organization’s values, role expectations, and culture fit.",
+              "Escalates complex candidate experience issues to senior team members."
+            ],
+            "IC4": [
+              "Establishes candidate experience standards for high-impact roles, adapting the process to ensure engagement and a positive experience for top-tier candidates.",
+              "Provides training and guidance to mid-level recruiters on best practices in candidate experience.",
+              "Manages complex candidate concerns independently, handles escalated candidate experience issues, ensuring a strong employer brand perception."
+            ],
+            "IC5": [
+              "Develops and oversees candidate experience standards, setting the bar for all candidate interactions within the organization.",
+              "Coaches and mentors the team on delivering exceptional candidate experiences.",
+              "Implements feedback systems to continuously improve candidate experience across all stages of hiring.",
+              "Oversees candidate experience initiatives, aligning them with employer branding to build a strong reputation in the talent market."
+            ]
+          },
+          "description": "Providing a seamless and engaging experience for candidates, ensuring timely, respectful, and transparent communication throughout the process. Recruiters maintain high standards of candidate engagement, resulting in positive candidate feedback and strong employer branding."
+        },
+        {
+          "name": "TA Business Partnering and Hiring Manager Advisory",
+          "levels": {
+            "IC2": [
+              "Supports hiring managers with recruitment updates and follows the direction set by more senior recruiters for prioritization.",
+              "Learns about business and brand needs, gradually building understanding of company goals to improve advisory skills.",
+              "Provides basic insights on hiring stages and timeline expectations but defers to senior team members for complex discussions or prioritization.",
+              "Assists with role prioritization as guided, focusing on building strong communication skills with hiring managers."
+            ],
+            "IC3": [
+              "Advises hiring managers on recruitment timelines, role scoping, and best practices for attracting talent in standard and moderately complex roles.",
+              "Collaborates with managers to set realistic hiring expectations, keeping them informed throughout the recruitment process.",
+              "Begins prioritizing roles based on immediate business needs, with support from senior team members for complex prioritization.",
+              "Has a fairly good understanding of the saas.group brand's business they are hiring for."
+            ],
+            "IC4": [
+              "Acts as a strategic, trusted partner to hiring managers for strategic roles, providing insights on market trends, talent availability, and competitive hiring strategies.",
+              "Balances priorities across multiple high-impact roles, adjusting hiring strategies based on business demands.",
+              "Coaches mid-level recruiters on hiring manager engagement and advisory best practices.",
+              "Has a strong understanding of the saas.group brands' business and product offering, challenges and business priorities, that helps prioritizing, pitching and HM advisory."
+            ],
+            "IC5": [
+              "Develops a strategic partnership framework for Talent Acquisition, aligning closely with senior leadership and business objectives.",
+              "Leads workforce planning discussions, advising on high-level talent needs and long-term hiring strategies.",
+              "Develops a prioritization framework for hiring needs across departments, ensuring alignment with organizational goals.",
+              "Sets standards for business partnering, guiding the team in managing expectations and delivering on hiring objectives."
+            ]
+          },
+          "description": "As a strategic advisor, the recruiter builds strong relationships with hiring managers, providing insights on market trends, advising on best hiring strategies, and ensuring realistic hiring expectations. This competency also includes prioritizing roles in alignment with business needs."
+        },
+        {
+          "name": "TA Operational Excellence",
+          "levels": {
+            "IC2": [
+              "Executes TA processes following established protocols, ensuring compliance with team standards.",
+              "Participates in TA projects led by senior team members, assisting with tasks such as gathering information, organizing data, and maintaining documentation.",
+              "Learns about process improvements by observing senior recruiters, gaining familiarity with best practices and efficiency tools.",
+              "Supports training activities by helping with logistics, preparing materials, and observing interview training sessions for learning purposes."
+            ],
+            "IC3": [
+              "Executes TA processes as defined, participating in improvement projects and providing feedback on operations.",
+              "Delivers basic interview training to hiring managers with support from senior team members.",
+              "Contributes to operational improvements, suggesting small-scale changes, participates in TA projects."
+            ],
+            "IC4": [
+              "Leads operational improvements, initiating and managing TA projects that streamline processes, such as workflow automation or refining interview guides.",
+              "Designs and delivers training programs for hiring managers and peers on topics like interviewing skills and candidate assessment.",
+              "Continuously refines TA processes, working toward operational excellence, efficiency, recruitment productivity and quality.",
+              "Able to identify bottlenecks, patterns and initiate and design projects to resolve them."
+            ],
+            "IC5": [
+              "Defines and drives operational excellence strategies across the TA function, aligning with organizational goals.",
+              "Oversees major TA projects, including process, tooling, and training initiatives that improve overall efficiency.",
+              "Establishes and monitors TA operational metrics, setting performance standards for the entire team / function."
+            ]
+          },
+          "description": "This competency involves creating and managing efficient processes and systems that support Talent Acquisition, including process improvements, training, and managing TA projects. TA Operational Excellence ensures TA activities align with organizational goals and deliver measurable impact."
+        },
+        {
+          "name": "Data-Driven Insights and Reporting",
+          "levels": {
+            "IC2": [
+              "Tracks basic KPIs (e.g., time-to-fill, candidate satisfaction) under guidance, learning the importance of data in recruitment decision-making.",
+              "Prepares data reports for more experienced recruiters, learning to interpret metrics and gather relevant information.",
+              "Supports data gathering for presentations and insights shared with hiring managers, gradually developing an understanding of data’s role in recruitment.",
+              "Uses data tools to document candidate information accurately, focusing on building proficiency with our ATS."
+            ],
+            "IC3": [
+              "Understands core TA metrics and tracks basic KPIs like time-to-fill and candidate satisfaction.",
+              "Uses data to make informed decisions in day-to-day activities, backing up hiring recommendations with relevant metrics.",
+              "Shares data insights with hiring managers to support understanding of recruitment progress and performance, with guidance from seniors."
+            ],
+            "IC4": [
+              "Analyzes data trends to inform hiring strategies, bringing meaningful insights to hiring managers and influencing decisions in the areas of",
+              "Funnel performance, conversions, forecasting, own capacity planning.",
+              "Monitors KPIs proactively, identifying and addressing any performance gaps by looking into data deeper, seeing for insights and understanding.",
+              "Coaches mid-level recruiters on using data effectively in recruitment.",
+              "Able to run sophisticated reports in ATS (Greenhouse), draw conclusions and applies efficiently in projects or during conversations.",
+              "Backs up proposals, suggestions, advisory with data."
+            ],
+            "IC5": [
+              "Defines the data-driven approach for the TA function, establishing standard metrics, reporting practices and insights to guide strategy and decision-making.",
+              "Leads data analysis to uncover strategic insights, guiding the TA team and leadership in data-backed decision-making.",
+              "Drives a culture of data-informed recruitment, educates, ensuring all team members understand and leverage metrics effectively."
+            ]
+          },
+          "description": "This competency involves using data to drive recruitment strategies, measure effectiveness, identify trends, and make informed recommendations. Data-driven recruiters bring insights to hiring managers and teams, supporting decision-making with quantitative evidence."
+        },
+        {
+          "name": "Candidate Channels Management",
+          "levels": {
+            "IC2": [
+              "Conducts basic sourcing through job boards, LinkedIn, and employee referrals, focusing on building a pipeline for standard roles.",
+              "Learns outbound sourcing techniques, shadowing more senior recruiters in direct search and candidate engagement.",
+              "Maintains relationships with prospective candidates by sending follow-up messages and organizing candidates in the CRM.",
+              "Assists with social media posting and recruitment marketing efforts, gaining exposure to employer branding strategies and tools."
+            ],
+            "IC3": [
+              "Uses standard sourcing channels effectively, building talent pipelines through outbound search and referrals.",
+              "Has a good understanding of sourcing techniques, boolean and applies sourcing tools. Writes engaging outreach messages with good response rates.",
+              "Maintains relationships with key candidates, tagging them for future roles within the CRM.",
+              "Collaborates with the team to post on social media and other channels as needed."
+            ],
+            "IC4": [
+              "Leads sourcing efforts for high-impact and critical roles (e.g. leadership positions or specific searches), using innovative approaches and effective candidate engagement techniques.",
+              "Skilled in diversity sourcing and able to build up a high-quality diverse candidate pool.",
+              "Maintains a well-organized talent pipeline and diverse candidate pools. Mentors mid-level recruiters on CRM best practices.",
+              "Develops targeted recruitment marketing strategies for niche or hard-to-fill roles."
+            ],
+            "IC5": [
+              "Oversees sourcing strategies across the organization, building long-term candidate channels for strategic hiring.",
+              "Able to independently run executive-level searches with good candidates engagement and built up a high-quality pipeline.",
+              "Establishes CRM protocols and candidate engagement strategies, creating a sustainable, diverse talent pipeline for strategic hiring.",
+              "Leads the organization’s recruitment marketing strategy, working with cross-functional teams to strengthen the employer brand."
+            ]
+          },
+          "description": "This competency focuses on building and maintaining effective candidate sourcing channels, including outbound and referral sourcing, recruitment marketing, and maintaining pipelines through candidate relationship management (CRM)."
+        }
+      ]
+    },
+    {
+      "name": "Accounting",
+      "sourceSheet": "WIP - Accounting",
+      "displayOrder": 8,
+      "competencies": [
+        {
+          "name": "ACCOUNTING STANDARDS & COMPLIANCE",
+          "levels": {
+            "IC2": [
+              "Has foundational awareness of the company's primary accounting standard (e.g. IFRS or US GAAP).",
+              "Applies standards to routine transactions under guidance (e.g. basic accruals, fixed asset recognition).",
+              "Escalates ambiguous accounting treatments to senior colleagues.",
+              "Developing awareness of local statutory requirements."
+            ],
+            "IC3": [
+              "Applies the primary accounting standard confidently to day-to-day transactions without supervision.",
+              "Understands key differences between US GAAP and IFRS; can identify which applies in a given context.",
+              "Flags potential compliance issues proactively and researches applicable guidance.",
+              "Familiar with local GAAP requirements for at least one jurisdiction."
+            ],
+            "IC4": [
+              "Interprets and applies accounting standards to complex or non-routine transactions (e.g. lease accounting under IFRS 16, business combinations).",
+              "Supports the team in navigating multi-GAAP environments; advises on differences and implications.",
+              "Monitors regulatory updates and communicates impact to the team.",
+              "Acts as internal go-to for standards questions; documents accounting policies."
+            ],
+            "IC5": [
+              "Recognised authority on accounting standards across US GAAP, IFRS, and relevant local GAAPs.",
+              "Shapes and owns the company's accounting policy framework; drives adoption of new standards.",
+              "Advises senior leadership on the financial reporting impact of strategic decisions (M&A, new product lines, market entry).",
+              "Represents the company in external technical discussions (auditors, advisors, regulators)."
+            ]
+          },
+          "description": "Knowledge and application of relevant accounting standards and regulatory requirements (US GAAP, IFRS, and/or local GAAP) to ensure compliant and accurate financial records."
+        },
+        {
+          "name": "CORE ACCOUNTING OPERATIONS",
+          "levels": {
+            "IC2": [
+              "Processes routine transactions accurately: invoices, payments, expense reports, payroll inputs.",
+              "Maintains and reconciles assigned GL accounts with guidance.",
+              "Completes month-end tasks from a checklist (accruals, prepayments, bank recs).",
+              "Learns and follows internal controls and approval workflows."
+            ],
+            "IC3": [
+              "Independently manages AR, AP, or Payroll sub-functions end-to-end.",
+              "Owns a set of GL accounts and ensures timely, accurate period-end close for those areas.",
+              "Identifies and resolves discrepancies and aged items without prompting.",
+              "Contributes to tax compliance tasks (VAT/GST returns, WHT filings) under guidance."
+            ],
+            "IC4": [
+              "Oversees the full month/quarter/year-end close process across multiple entities or functions.",
+              "Ensures the integrity of the general ledger; reviews and approves junior team members' entries.",
+              "Leads tax compliance across multiple jurisdictions; coordinates with external tax advisors.",
+              "Proactively identifies and resolves control gaps or process inefficiencies in accounting operations."
+            ],
+            "IC5": [
+              "Sets the standard for accounting operations quality across the organisation.",
+              "Designs and owns the global close process calendar, ensuring scalability as the company grows.",
+              "Drives the tax strategy in partnership with external advisors; manages transfer pricing and group tax compliance.",
+              "Mentors and develops the accounting team; defines quality benchmarks and performance expectations."
+            ]
+          },
+          "description": "Execution and ownership of the full accounting cycle — Accounts Receivable, Accounts Payable, Payroll, General Ledger, and Tax — ensuring accuracy, timeliness, and completeness of financial records."
+        },
+        {
+          "name": "REVENUE RECOGNITION & BILLING",
+          "levels": {
+            "IC2": [
+              "Understands the basic 5-step model of ASC 606 / IFRS 15 at a conceptual level.",
+              "Assists with processing subscription invoices and reconciling billing data to the GL.",
+              "Flags unusual contract terms or billing scenarios to senior colleagues.",
+              "Supports deferred revenue schedules with guidance."
+            ],
+            "IC3": [
+              "Applies ASC 606 / IFRS 15 to standard SaaS contracts (subscription, seat-based, usage-based).",
+              "Manages the end-to-end billing cycle: invoice generation, collections, and cash application.",
+              "Independently maintains deferred and accrued revenue schedules.",
+              "Identifies revenue recognition issues in new contract structures and escalates appropriately."
+            ],
+            "IC4": [
+              "Analyses complex contract structures (multi-element arrangements, variable consideration, renewals) and determines correct revenue treatment.",
+              "Owns revenue close: reviews all revenue entries, waterfall schedules, and reconciliations.",
+              "Partners with Sales and Legal during contract negotiations to ensure revenue-friendly deal structures.",
+              "Develops and maintains internal revenue recognition policies and memos."
+            ],
+            "IC5": [
+              "Defines the revenue recognition framework for the organisation across all product lines and geographies.",
+              "Acts as the ultimate authority on complex or novel revenue scenarios; signs off on technical accounting memos.",
+              "Collaborates with Product and Sales leadership to design billing models that are commercially effective and compliant.",
+              "Ensures audit-readiness of all revenue processes; manages auditor review of revenue."
+            ]
+          },
+          "description": "Application of SaaS revenue recognition principles (ASC 606 / IFRS 15) and management of the billing cycle to ensure accurate, compliant, and timely revenue recording."
+        },
+        {
+          "name": "FINANCIAL REPORTING & GROUP CONSOLIDATION",
+          "levels": {
+            "IC2": [
+              "Prepares standard recurring reports using templates (P&L, balance sheet, cash flow summaries).",
+              "Gathers and organises data for management reporting packs.",
+              "Learns the basics of intercompany eliminations and group consolidation under guidance.",
+              "Performs basic variance analysis with support from senior team members."
+            ],
+            "IC3": [
+              "Produces management reporting packs on time and with commentary.",
+              "Contributes to statutory financial statement preparation for single entities.",
+              "Performs intercompany reconciliations and assists with consolidation entries.",
+              "Delivers meaningful variance analysis (actuals vs. budget/forecast) and highlights key drivers."
+            ],
+            "IC4": [
+              "Leads preparation of consolidated group financial statements across multiple legal entities.",
+              "Manages intercompany eliminations, FX translation, and acquisition-related adjustments.",
+              "Owns the management reporting cycle; develops insightful commentary for CFO and leadership.",
+              "Partners with FP&A on budget and forecast inputs; bridges accounting and finance perspectives."
+            ],
+            "IC5": [
+              "Defines the group reporting framework, chart of accounts, and consolidation methodology.",
+              "Accountable for the accuracy and completeness of all external and internal financial reporting.",
+              "Drives narrative and insight at Board and investor level; translates financial results into strategic context.",
+              "Leads reporting improvement initiatives (automation, XBRL, integrated reporting)."
+            ]
+          },
+          "description": "Preparation, accuracy, and insight across internal management reporting, statutory financial statements, and consolidated group reporting across entities."
+        },
+        {
+          "name": "AUDIT & INTERNAL CONTROLS",
+          "levels": {
+            "IC2": [
+              "Understands the purpose of internal controls and the audit process at a foundational level.",
+              "Prepares assigned audit schedules and supporting documentation accurately and on time.",
+              "Responds to auditor requests for information under guidance of senior colleagues.",
+              "Follows established controls in day-to-day work (segregation of duties, approval workflows)."
+            ],
+            "IC3": [
+              "Independently prepares audit files and responds to auditor queries for assigned areas.",
+              "Maintains documentation of key controls (narratives, walkthroughs, control matrices).",
+              "Identifies control gaps and raises them to management with suggested remediation.",
+              "Tracks and follows up on audit findings and management letter points."
+            ],
+            "IC4": [
+              "Leads the annual audit process end-to-end: planning, fieldwork coordination, and sign-off.",
+              "Designs and monitors the internal control framework across accounting processes.",
+              "Liaises directly with external auditors and manages the relationship throughout the year.",
+              "Drives remediation of control deficiencies; implements process changes to prevent recurrence."
+            ],
+            "IC5": [
+              "Owns the organisation's audit and controls strategy; accountable for clean audit opinions.",
+              "Designs the control environment for new entities, products, or geographies as the business scales.",
+              "Acts as primary contact for external auditors at leadership level; manages escalations and technical disputes.",
+              "Champions a culture of control awareness and continuous improvement across the finance function."
+            ]
+          },
+          "description": "Readiness for and active support of internal and external audits, and maintenance of a robust internal control environment to safeguard the accuracy and reliability of financial information."
+        },
+        {
+          "name": "SYSTEMS, TOOLS & PROCESS IMPROVEMENT",
+          "levels": {
+            "IC2": [
+              "Uses the primary accounting system confidently for routine tasks (entering transactions, running standard reports).",
+              "Learns system workflows and adheres to established data-entry standards.",
+              "Identifies manual or repetitive tasks and flags improvement opportunities to their manager.",
+              "Explores AI and automation features with curiosity; eager to experiment."
+            ],
+            "IC3": [
+              "Proficient in the primary accounting tool; uses advanced features (reporting, dashboards, recurring journals).",
+              "Familiar with integrated tools in the finance stack (billing, expense management, FX, bank feeds).",
+              "Implements small-scale process improvements: templates, checklists, automation of recurring entries.",
+              "Uses AI tools to boost personal productivity (e.g. drafting, data reconciliation, report generation)."
+            ],
+            "IC4": [
+              "Leads system configuration changes and new module rollouts (e.g. multi-entity setup, new integrations).",
+              "Drives meaningful process improvement projects: close acceleration, automation of manual reconciliations, consolidation tooling.",
+              "Evaluates and recommends new tools to fill gaps in the finance technology stack.",
+              "Trains and upskills the team on systems and new ways of working."
+            ],
+            "IC5": [
+              "Defines the accounting systems and technology roadmap aligned to company growth plans.",
+              "Leads ERP upgrades, migrations, or implementations; accountable for data integrity and go-live.",
+              "Pioneers a culture of continuous improvement and automation across the finance function.",
+              "Benchmarks processes against industry best practice; sets the standard for efficiency and scalability."
+            ]
+          },
+          "description": "Proficiency with cloud-based accounting systems (e.g. NetSuite, Xero, QuickBooks Online) and the ability to continuously improve accounting processes through automation, workflow optimisation, and close acceleration."
+        }
+      ]
+    }
+  ]
+}
