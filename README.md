@@ -48,9 +48,10 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 - A left sidebar with **Dashboard**, **Framework Library**, **People**, plus
   empty placeholders for **Leveling** (Module 3 — Levelling Flow) and
   **Performance assessment**.
-- An "Acting as" switcher (top-left, bottom of sidebar) to impersonate any
-  seeded user and see the permission matrix in action (there is no auth module
-  in v1 — out of scope per the PRD).
+- **Google SSO** sign-in (Auth.js). Only provisioned users (an email matching a
+  non-archived `User`) may sign in; everyone else sees an access-denied message.
+- An "Acting as" switcher (bottom of sidebar, **HR/Admin only**) to impersonate
+  any user and see the permission matrix in action, plus a **Sign out** button.
 
 ---
 
@@ -58,9 +59,15 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 
 ```bash
 npm install
-npm run setup     # prisma generate + db push + seed
-npm run dev       # http://localhost:3000
+cp .env.example .env   # then set AUTH_DEV_BYPASS="true" for local dev (skips Google SSO)
+npm run setup          # prisma generate + db push + seed
+npm run dev            # http://localhost:3000
 ```
+
+> **Local auth:** with `AUTH_DEV_BYPASS="true"` the app skips Google SSO and acts
+> as the first HR/Admin — convenient for development. To exercise the real
+> sign-in flow locally, set it to `"false"` and provide `AUTH_GOOGLE_ID` /
+> `AUTH_GOOGLE_SECRET` / `AUTH_SECRET` (see [Authentication](#authentication--google-sso)).
 
 Other scripts:
 
@@ -71,13 +78,13 @@ Other scripts:
 | `npm run build`   | Production build (type-checks the whole app)       |
 
 ### Try it
-- **Framework Library** → switch the **Brand context** to *Channable* and open
-  the **Engineering** family: "Code Quality & Craft" shows a **brand fork** that
-  overrides the baseline, and the general views show Channable's **add-on**
-  competency.
-- Edit a cell → **Save draft** → **Publish** to see the version bump and diff
-  preview. Try editing a *shared baseline* competency while acting as a
-  Brand/Team Admin — it's blocked.
+- **Framework Library** → browse **General (IC)**, **General (Manager)**, and
+  each job family. Expand cells to see the per-level bullets loaded from the
+  spreadsheet. Edit a cell → **Save draft** → **Publish** to see the version bump
+  and diff preview. Acting as a Brand/Team Admin, try editing a *shared baseline*
+  competency — it's blocked.
+- Set a **Brand context** and use **Fork for brand** on a functional competency
+  to create a brand variant that overrides the baseline for that brand's users.
 - **People** → open a profile, set a level (records immutable history), edit the
   development plan as a manager, complete to-dos.
 
@@ -105,6 +112,35 @@ levels (as in the source sheets); the general competencies carry IC2–IC5 **and
 M4–M6. Re-running the extractor regenerates the JSON to re-import on demand
 (FR17c).
 
+## Authentication — Google SSO
+
+Sign-in uses **Auth.js (NextAuth v5)** with the Google provider.
+
+- **Who can sign in:** only people who have a profile in the system — i.e. a
+  Google email that matches a non-archived `User`. Everyone else is rejected with
+  an access-denied message. An HR/Admin provisions people via **People → New
+  user** (which also seeds their competencies and onboarding to-dos). Optionally
+  set `AUTH_ALLOWED_DOMAIN=saas.group` to additionally restrict by email domain.
+- **Sessions:** stateless JWT cookies (no session tables). The signed-in email is
+  mapped to the `User` record on each request to resolve role + brand.
+- **Impersonation:** an HR/Admin can "act as" another user to test the permission
+  matrix; everyone else is locked to their own identity. **Sign out** is in the
+  sidebar.
+
+### One-time Google Cloud setup
+1. [console.cloud.google.com](https://console.cloud.google.com) → create/select a
+   project → **APIs & Services → OAuth consent screen** → configure (Internal if
+   you have a Google Workspace for saas.group).
+2. **APIs & Services → Credentials → Create credentials → OAuth client ID** →
+   type **Web application**.
+3. **Authorized redirect URI:** add
+   `https://<your-domain>/api/auth/callback/google`
+   (e.g. `https://your-app.up.railway.app/api/auth/callback/google`; for local
+   testing also add `http://localhost:3000/api/auth/callback/google`).
+4. Copy the **Client ID** and **Client secret** into `AUTH_GOOGLE_ID` /
+   `AUTH_GOOGLE_SECRET`.
+5. Generate `AUTH_SECRET` with `openssl rand -base64 32`.
+
 ## Deploying so your team can test
 
 The app is a standard Next.js server + a **SQLite** file. The only real
@@ -130,18 +166,28 @@ database **once** if it is empty (`scripts/docker-start.sh` →
 2. **Add a persistent volume.** Open the service → **Variables/Settings →
    Volumes** (or right-click the service → *Attach Volume*) → create a volume
    and set the **mount path** to `/data`. (1 GB is plenty.)
-3. **Set the env var.** Service → **Variables** → add:
-   `DATABASE_URL=file:/data/dev.db`
-   Don't set `PORT` — Railway injects it and the Next.js server uses it
-   automatically.
+3. **Set the env vars.** Service → **Variables** → add:
+   ```
+   DATABASE_URL=file:/data/dev.db
+   AUTH_SECRET=<openssl rand -base64 32>
+   AUTH_GOOGLE_ID=<from Google Cloud>
+   AUTH_GOOGLE_SECRET=<from Google Cloud>
+   AUTH_TRUST_HOST=true
+   # optional: AUTH_ALLOWED_DOMAIN=saas.group
+   ```
+   Don't set `PORT` (Railway injects it) and **don't** set `AUTH_DEV_BYPASS`
+   (leaving it unset keeps SSO enforced).
 4. **Expose a public URL.** Service → **Settings → Networking → Generate
-   Domain**. This gives you a `*.up.railway.app` URL.
+   Domain**. This gives you a `*.up.railway.app` URL. Then add
+   `https://<that-domain>/api/auth/callback/google` as an authorized redirect URI
+   in your Google OAuth client (see [Authentication](#authentication--google-sso)).
 5. **Redeploy** (Railway usually does this automatically after the volume + var
    changes). Watch the **Deploy logs** — on first boot you'll see
    `Applying database schema…`, `Empty database detected — running seed…`, then
    `Starting Next.js…`.
-6. **Open the URL and share it** with your team. The seeded demo users let them
-   try every role via the "Acting as" switcher in the sidebar.
+6. **Sign in and invite your team.** Sign in with your Google account
+   (`ferenc@saas.group` is seeded as HR/Admin). Add teammates via **People → New
+   user** with their work email so they can sign in too.
 
 **If a later deploy ever needs a fresh database** (e.g. you re-import the
 spreadsheet): open the service shell / one-off command and run
@@ -160,14 +206,14 @@ change `provider = "postgresql"` in `prisma/schema.prisma`, set `DATABASE_URL`
 to the Postgres connection string, run `prisma db push` + seed once, then deploy.
 I can make this switch for you if you'd like to go this route.
 
-### Before you publish — two things to know
-- **No authentication in v1** (it's out of scope in the PRD). The "Acting as"
-  switcher lets anyone impersonate any role, including HR/Admin. That's ideal for
-  a controlled internal test, but **don't expose it publicly without protection**
-  — put it behind your VPN/SSO, HTTP basic auth, or the host's password-protect
-  feature, or restrict access to your team.
-- **Seed data includes demo users.** Real people can be added in-app (People →
-  New user) or you can clear the demo users first.
+### Before you publish — things to know
+- **Access is gated by Google SSO** and limited to provisioned users, so the URL
+  is safe to share — only people you've added (and who pass the optional domain
+  check) can get in. Make sure `AUTH_DEV_BYPASS` is **unset/false** in the deploy
+  (it is by default).
+- **Seed data includes demo users** (e.g. `*.example` accounts) used to showcase
+  the permission matrix. They can't actually sign in (no real Google account);
+  remove them once real users are added if you prefer a clean directory.
 
 ## Out of scope for v1 (per PRD §7)
 Levelling Flow execution, onboarding/education UI, performance ratings,
