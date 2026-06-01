@@ -49,6 +49,8 @@ const LEVELS = {
 };
 
 async function wipe() {
+  await prisma.selfAssessment.deleteMany();
+  await prisma.cycle.deleteMany();
   await prisma.competencyLevelExpectationVersion.deleteMany();
   await prisma.userCompetency.deleteMany();
   await prisma.levellingHistoryRecord.deleteMany();
@@ -358,6 +360,16 @@ async function main() {
     ],
   });
 
+  // ── Active levelling cycle ───────────────────────────────────────────────────
+  await prisma.cycle.create({
+    data: {
+      label: "H1 2026 — Development Cycle",
+      startsAt: new Date("2026-01-01"),
+      endsAt: new Date("2026-06-30"),
+      isActive: true,
+    },
+  });
+
   const counts = {
     brands: await prisma.brand.count(),
     levels: await prisma.level.count(),
@@ -366,6 +378,7 @@ async function main() {
     expectations: await prisma.competencyLevelExpectation.count(),
     users: await prisma.user.count(),
     userCompetencies: await prisma.userCompetency.count(),
+    cycles: await prisma.cycle.count(),
   };
   console.log("Seed complete:", counts);
 }

@@ -19,12 +19,12 @@ const NAV: { section: string; items: NavItem[] }[] = [
       { href: "/", label: "Dashboard", icon: <HomeIcon /> },
       { href: "/library", label: "Framework Library", icon: <GridIcon /> },
       { href: "/people", label: "People", icon: <UsersIcon /> },
+      { href: "/leveling", label: "Leveling", icon: <LadderIcon /> },
     ],
   },
   {
     section: "Coming soon",
     items: [
-      { href: "/leveling", label: "Leveling", icon: <LadderIcon />, placeholder: true },
       {
         href: "/performance",
         label: "Performance assessment",
