@@ -125,3 +125,15 @@ export function canEditPermissionLevel(a: Actor): boolean {
 export function canCreateUser(a: Actor): boolean {
   return isHrAdmin(a);
 }
+
+// ── Admin module ────────────────────────────────────────────────────────────
+
+// Access to the Admin area (People administration). HR/Admin + Brand admins.
+export function canAdminister(a: Actor): boolean {
+  return a.role === Role.HR_ADMIN || a.role === Role.BRAND_ADMIN;
+}
+
+// Organisation management (Brands): HR/Admin only.
+export function canManageOrg(a: Actor): boolean {
+  return isHrAdmin(a);
+}

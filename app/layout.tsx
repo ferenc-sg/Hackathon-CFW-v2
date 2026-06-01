@@ -4,6 +4,7 @@ import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { prisma } from "@/lib/db";
 import { getActor } from "@/lib/session";
+import { canAdminister } from "@/lib/permissions";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -39,7 +40,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en" className={inter.variable}>
       <body>
         <div className="flex h-screen overflow-hidden">
-          <Sidebar actor={actorInfo} users={userOpts} />
+          <Sidebar actor={actorInfo} users={userOpts} canAdmin={actor ? canAdminister(actor) : false} />
           <main className="flex-1 overflow-y-auto">{children}</main>
         </div>
       </body>

@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { GridCell, type CellData } from "./GridCell";
 import { ProvenanceBadge } from "@/components/Badges";
-import { forkCompetency } from "@/app/actions/library";
+import { CompetencyForm } from "./CompetencyForm";
+import { forkCompetency, publishCompetency } from "@/app/actions/library";
 
 export type GridRow = {
   competencyId: string;
@@ -14,8 +15,15 @@ export type GridRow = {
   canEdit: boolean;
   canPublish: boolean;
   isFork: boolean;
+  isDraft: boolean;
   overridesBaselineName?: string;
   canFork: boolean;
+  draftData?: {
+    name: string;
+    description: string | null;
+    jobFamilyId: string | null;
+    perLevel: Record<string, string[]>;
+  };
   cells: Record<string, CellData | null>;
 };
 
@@ -25,12 +33,29 @@ export function FrameworkGrid({
   columns,
   rows,
   currentBrandId,
+  families,
 }: {
   columns: GridColumn[];
   rows: GridRow[];
   currentBrandId: string | null;
+  families: { id: string; name: string }[];
 }) {
-  const [expandedAll, setExpandedAll] = useState(false);
+  const [openIds, setOpenIds] = useState<Set<string>>(new Set());
+
+  const levelOpts = columns.map((c) => ({ code: c.code, label: c.label }));
+  const allOpen = rows.length > 0 && rows.every((r) => openIds.has(r.competencyId));
+
+  function toggle(id: string) {
+    setOpenIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+  function toggleAll() {
+    setOpenIds(allOpen ? new Set() : new Set(rows.map((r) => r.competencyId)));
+  }
 
   const tracks = Array.from(new Set(columns.map((c) => c.track)));
 
@@ -40,8 +65,8 @@ export function FrameworkGrid({
         <span className="text-xs text-slate-400">
           {rows.length} competenc{rows.length === 1 ? "y" : "ies"} · {columns.length} levels
         </span>
-        <button onClick={() => setExpandedAll((e) => !e)} className="btn-ghost px-2 py-1 text-xs">
-          {expandedAll ? "Collapse all" : "Expand all"}
+        <button onClick={toggleAll} className="btn-ghost px-2 py-1 text-xs">
+          {allOpen ? "Collapse all" : "Expand all"}
         </button>
       </div>
 
@@ -63,7 +88,7 @@ export function FrameworkGrid({
               </tr>
             )}
             <tr className="bg-slate-50">
-              <th className="sticky left-0 z-10 w-56 border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+              <th className="sticky left-0 z-10 w-64 border-b border-slate-200 bg-slate-50 px-4 py-2.5 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
                 Competency
               </th>
               {columns.map((c) => (
@@ -78,45 +103,82 @@ export function FrameworkGrid({
             </tr>
           </thead>
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.competencyId} className={row.isFork ? "bg-amber-50/40" : ""}>
-                <td className="sticky left-0 z-10 w-56 border-b border-slate-100 bg-white px-4 py-2.5 align-top">
-                  <div className="flex flex-col gap-1">
-                    <span className="text-sm font-medium text-slate-800">{row.name}</span>
-                    <ProvenanceBadge provenance={row.provenance} />
-                    {row.brandName && (
-                      <span className="text-[10px] text-slate-400">{row.brandName}</span>
-                    )}
-                    {row.overridesBaselineName && (
-                      <span className="text-[10px] italic text-[#C44220]">
-                        overrides baseline for this brand
-                      </span>
-                    )}
-                    {row.description && (
-                      <span className="text-[11px] leading-snug text-slate-400">{row.description}</span>
-                    )}
-                    {row.canFork && currentBrandId && (
-                      <form action={forkCompetency} className="mt-1">
-                        <input type="hidden" name="competencyId" value={row.competencyId} />
-                        <input type="hidden" name="brandId" value={currentBrandId} />
-                        <button className="text-[11px] font-medium text-brand-600 hover:underline">
-                          Fork for brand →
-                        </button>
-                      </form>
-                    )}
-                  </div>
-                </td>
-                {columns.map((c) => (
-                  <GridCell
-                    key={c.code}
-                    cell={row.cells[c.code] ?? null}
-                    expandedAll={expandedAll}
-                    canEdit={row.canEdit}
-                    canPublish={row.canPublish}
-                  />
-                ))}
-              </tr>
-            ))}
+            {rows.map((row) => {
+              const open = openIds.has(row.competencyId);
+              return (
+                <tr key={row.competencyId} className={row.isFork ? "bg-amber-50/40" : ""}>
+                  <td className="sticky left-0 z-10 w-64 border-b border-slate-100 bg-white px-4 py-2.5 align-top">
+                    <div className="flex flex-col gap-1">
+                      <button
+                        onClick={() => toggle(row.competencyId)}
+                        className="flex items-start gap-1.5 text-left text-sm font-medium text-slate-800 hover:text-slate-950"
+                      >
+                        <span className="mt-0.5 text-slate-400">{open ? "▾" : "▸"}</span>
+                        <span>{row.name}</span>
+                      </button>
+                      <div className="flex flex-wrap items-center gap-1 pl-5">
+                        <ProvenanceBadge provenance={row.provenance} />
+                        {row.isDraft && (
+                          <span className="badge bg-[#FDE8E3] text-[#C44220]" title="Unpublished draft">
+                            ● Draft
+                          </span>
+                        )}
+                      </div>
+                      {row.brandName && <span className="pl-5 text-[10px] text-slate-400">{row.brandName}</span>}
+                      {row.overridesBaselineName && (
+                        <span className="pl-5 text-[10px] italic text-[#C44220]">
+                          overrides baseline for this brand
+                        </span>
+                      )}
+                      {open && row.description && (
+                        <span className="pl-5 text-[11px] leading-snug text-slate-400">{row.description}</span>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 pl-5">
+                        {row.canFork && currentBrandId && (
+                          <form action={forkCompetency}>
+                            <input type="hidden" name="competencyId" value={row.competencyId} />
+                            <input type="hidden" name="brandId" value={currentBrandId} />
+                            <button className="text-[11px] font-medium text-brand-600 hover:underline">
+                              Fork for brand →
+                            </button>
+                          </form>
+                        )}
+                        {row.isDraft && row.canEdit && row.draftData && (
+                          <CompetencyForm
+                            mode="edit"
+                            triggerLabel="Edit draft"
+                            triggerClassName="text-[11px] font-medium text-brand-600 hover:underline"
+                            families={families}
+                            levels={levelOpts}
+                            competencyId={row.competencyId}
+                            initial={row.draftData}
+                          />
+                        )}
+                        {row.isDraft && row.canPublish && (
+                          <form action={publishCompetency}>
+                            <input type="hidden" name="competencyId" value={row.competencyId} />
+                            <button className="text-[11px] font-medium text-[#0e7d51] hover:underline">
+                              Publish
+                            </button>
+                          </form>
+                        )}
+                      </div>
+                    </div>
+                  </td>
+                  {columns.map((c) => (
+                    <GridCell
+                      key={c.code}
+                      cell={row.cells[c.code] ?? null}
+                      open={open}
+                      canEdit={row.canEdit}
+                      canPublish={row.canPublish}
+                      draftMode={row.isDraft}
+                    />
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

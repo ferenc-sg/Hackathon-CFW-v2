@@ -12,42 +12,43 @@ type NavItem = {
   placeholder?: boolean;
 };
 
-const NAV: { section: string; items: NavItem[] }[] = [
-  {
-    section: "Operate",
-    items: [
-      { href: "/", label: "Dashboard", icon: <HomeIcon /> },
-      { href: "/library", label: "Framework Library", icon: <GridIcon /> },
-      { href: "/people", label: "People", icon: <UsersIcon /> },
-      { href: "/leveling", label: "Leveling", icon: <LadderIcon /> },
-    ],
-  },
-  {
-    section: "Coming soon",
-    items: [
-      {
-        href: "/performance",
-        label: "Performance assessment",
-        icon: <ChartIcon />,
-        placeholder: true,
-      },
-    ],
-  },
-];
-
 type ActorInfo = { id: string; name: string; role: string; brand: string };
 
 export function Sidebar({
   actor,
   users,
+  canAdmin,
 }: {
   actor: ActorInfo | null;
   users: ActorInfo[];
+  canAdmin: boolean;
 }) {
   const pathname = usePathname();
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const nav: { section: string; items: NavItem[] }[] = [
+    {
+      section: "My career",
+      items: [
+        { href: "/", label: "My profile", icon: <UserIcon /> },
+        { href: "/leveling", label: "Leveling", icon: <LadderIcon /> },
+        { href: "/performance", label: "Performance assessment", icon: <ChartIcon />, placeholder: true },
+      ],
+    },
+    {
+      section: "Operate",
+      items: [
+        { href: "/library", label: "Framework library", icon: <GridIcon /> },
+        ...(canAdmin ? [{ href: "/admin", label: "Admin", icon: <ShieldIcon /> }] : []),
+      ],
+    },
+  ];
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    // Admin owns the People profile pages too.
+    if (href === "/admin") return pathname.startsWith("/admin") || pathname.startsWith("/people");
+    return pathname.startsWith(href);
+  };
 
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-slate-200 bg-white">
@@ -62,7 +63,7 @@ export function Sidebar({
       </div>
 
       <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-2">
-        {NAV.map((group) => (
+        {nav.map((group) => (
           <div key={group.section}>
             <div className="px-2 pb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">
               {group.section}
@@ -123,10 +124,18 @@ export function Sidebar({
   );
 }
 
-function HomeIcon() {
+function UserIcon() {
   return (
     <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <path d="M3 9l7-6 7 6v8a1 1 0 0 1-1 1h-3v-5H7v5H4a1 1 0 0 1-1-1V9Z" strokeLinejoin="round" />
+      <circle cx="10" cy="6.5" r="3.2" />
+      <path d="M3.5 17c0-3 2.9-5 6.5-5s6.5 2 6.5 5" strokeLinecap="round" />
+    </svg>
+  );
+}
+function ShieldIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M10 2.5l6 2.2v4.6c0 3.6-2.5 6.6-6 7.7-3.5-1.1-6-4.1-6-7.7V4.7l6-2.2Z" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -137,15 +146,6 @@ function GridIcon() {
       <rect x="11" y="3" width="6" height="6" rx="1" />
       <rect x="3" y="11" width="6" height="6" rx="1" />
       <rect x="11" y="11" width="6" height="6" rx="1" />
-    </svg>
-  );
-}
-function UsersIcon() {
-  return (
-    <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <circle cx="7" cy="6" r="3" />
-      <path d="M2 17c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5" strokeLinecap="round" />
-      <path d="M13 4.2A3 3 0 0 1 13 10M14 12.8c2.2.5 4 2.2 4 4.2" strokeLinecap="round" />
     </svg>
   );
 }

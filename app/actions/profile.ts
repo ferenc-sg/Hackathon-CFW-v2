@@ -198,6 +198,12 @@ export async function createUser(formData: FormData) {
   if (!name || !email) throw new Error("Name and email are required.");
   if (!(role in Role)) throw new Error("Invalid role.");
 
+  // Only an actual manager can be assigned as the new user's manager.
+  if (managerId) {
+    const mgr = await prisma.user.findFirst({ where: { id: managerId, archivedAt: null } });
+    if (!mgr || mgr.role !== Role.MANAGER) throw new Error("Selected manager must have the Manager role.");
+  }
+
   const created = await prisma.user.create({
     data: {
       name,
@@ -220,7 +226,7 @@ export async function createUser(formData: FormData) {
 
   if (jobFamilyId) await reconcileUserCompetencies(created.id, jobFamilyId, brandId);
 
-  revalidatePath("/people");
+  revalidatePath("/admin");
   return created.id;
 }
 
