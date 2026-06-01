@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ActorSwitcher } from "./ActorSwitcher";
+import { signOutAction, stopImpersonating } from "@/app/actions/session";
 import { ROLE_LABELS, type Role } from "@/lib/enums";
 
 type NavItem = {
@@ -39,10 +40,16 @@ type ActorInfo = { id: string; name: string; role: string; brand: string };
 
 export function Sidebar({
   actor,
+  selfId,
   users,
+  canImpersonate,
+  impersonating,
 }: {
   actor: ActorInfo | null;
+  selfId: string;
   users: ActorInfo[];
+  canImpersonate: boolean;
+  impersonating: boolean;
 }) {
   const pathname = usePathname();
 
@@ -98,9 +105,20 @@ export function Sidebar({
         ))}
       </nav>
 
-      <div className="border-t border-slate-200 px-4 py-4">
+      <div className="space-y-3 border-t border-slate-200 px-4 py-4">
+        {impersonating && (
+          <div className="rounded-lg border border-amber-200 bg-amber-50 px-2.5 py-2">
+            <div className="text-[11px] font-medium text-amber-800">Acting as another user</div>
+            <form action={stopImpersonating} className="mt-1">
+              <button type="submit" className="text-[11px] font-semibold text-amber-700 hover:underline">
+                ← Stop &amp; return to my view
+              </button>
+            </form>
+          </div>
+        )}
+
         {actor && (
-          <div className="mb-3 flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200 text-xs font-semibold text-slate-600">
               {actor.name
                 .split(" ")
@@ -116,7 +134,14 @@ export function Sidebar({
             </div>
           </div>
         )}
-        {actor && <ActorSwitcher users={users} currentId={actor.id} />}
+
+        {canImpersonate && <ActorSwitcher users={users} currentId={actor?.id ?? selfId} />}
+
+        <form action={signOutAction}>
+          <button type="submit" className="btn-ghost w-full justify-start px-2 text-sm text-slate-500">
+            <SignOutIcon /> Sign out
+          </button>
+        </form>
       </div>
     </aside>
   );
@@ -152,6 +177,14 @@ function LadderIcon() {
   return (
     <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.6">
       <path d="M6 2v16M14 2v16M6 6h8M6 10h8M6 14h8" strokeLinecap="round" />
+    </svg>
+  );
+}
+function SignOutIcon() {
+  return (
+    <svg viewBox="0 0 20 20" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M8 17H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3" strokeLinecap="round" />
+      <path d="M13 14l4-4-4-4M17 10H8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
