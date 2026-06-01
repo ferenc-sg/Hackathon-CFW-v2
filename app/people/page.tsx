@@ -56,7 +56,7 @@ export default async function PeoplePage() {
               {visible.map((u) => (
                 <tr key={u.id} className="hover:bg-slate-50">
                   <td className="px-5 py-3">
-                    <Link href={`/people/${u.id}`} className="font-medium text-brand-700 hover:underline">
+                    <Link href={`/people/${u.id}`} className="font-medium text-[#7B6FCC] hover:underline">
                       {u.name}
                     </Link>
                     <div className="text-xs text-slate-400">{u.email}</div>

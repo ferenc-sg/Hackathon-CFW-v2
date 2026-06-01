@@ -56,7 +56,7 @@ export default async function DashboardPage() {
             <section className="card p-6 lg:col-span-2">
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-base font-semibold text-slate-900">My to-dos</h2>
-                <Link href={`/people/${me.id}`} className="text-sm font-medium text-brand-600 hover:underline">
+                <Link href={`/people/${me.id}`} className="text-sm font-medium text-[#7B6FCC] hover:underline">
                   View my profile →
                 </Link>
               </div>

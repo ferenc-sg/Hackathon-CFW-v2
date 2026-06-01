@@ -59,7 +59,7 @@ export function Sidebar({
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-slate-200 bg-white">
       <div className="flex items-center gap-2 px-5 py-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 font-bold text-white">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7B6FCC] font-bold text-white">
           CF
         </div>
         <div className="leading-tight">
@@ -83,11 +83,11 @@ export function Sidebar({
                       href={item.href}
                       className={`group flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-sm font-medium transition-colors ${
                         active
-                          ? "bg-brand-50 text-brand-700"
+                          ? "bg-[#EDE9FC] text-[#5B52B0]"
                           : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                       }`}
                     >
-                      <span className={active ? "text-brand-600" : "text-slate-400"}>
+                      <span className={active ? "text-[#7B6FCC]" : "text-slate-400"}>
                         {item.icon}
                       </span>
                       <span className="flex-1">{item.label}</span>
