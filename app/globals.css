@@ -15,6 +15,28 @@ body {
   @apply bg-white font-sans text-slate-800 antialiased;
 }
 
+@layer base {
+  /* Visible keyboard focus for all interactive elements (buttons, links, etc.).
+     Inputs keep their own focus ring via the .input class (higher specificity). */
+  :focus-visible {
+    outline: 2px solid #f04e23;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Respect users who prefer reduced motion — make transitions/animations instant. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
 @layer components {
   .badge {
     @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium;

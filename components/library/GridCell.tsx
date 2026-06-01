@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { saveDraft, publishExpectation, discardDraft } from "@/app/actions/library";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 
 export type CellData = {
   id: string;
@@ -63,11 +64,11 @@ export function GridCell({
               <div className="mt-2 flex gap-2">
                 <form action={publishExpectation}>
                   <input type="hidden" name="expectationId" value={cell.id} />
-                  <button className="btn-primary px-2 py-1 text-xs">Publish</button>
+                  <SubmitButton className="btn-primary px-2 py-1 text-xs" pendingText="Publishing…">Publish</SubmitButton>
                 </form>
                 <form action={discardDraft}>
                   <input type="hidden" name="expectationId" value={cell.id} />
-                  <button className="btn-ghost px-2 py-1 text-xs">Discard</button>
+                  <SubmitButton className="btn-ghost px-2 py-1 text-xs" pendingText="…">Discard</SubmitButton>
                 </form>
               </div>
             )}

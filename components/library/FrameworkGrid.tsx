@@ -4,6 +4,7 @@ import { useState } from "react";
 import { GridCell, type CellData } from "./GridCell";
 import { ProvenanceBadge } from "@/components/Badges";
 import { CompetencyForm } from "./CompetencyForm";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 import { forkCompetency, publishCompetency } from "@/app/actions/library";
 
 export type GridRow = {
@@ -139,9 +140,9 @@ export function FrameworkGrid({
                           <form action={forkCompetency}>
                             <input type="hidden" name="competencyId" value={row.competencyId} />
                             <input type="hidden" name="brandId" value={currentBrandId} />
-                            <button className="text-[11px] font-medium text-brand-600 hover:underline">
+                            <SubmitButton className="text-[11px] font-medium text-brand-600 hover:underline" pendingText="Forking…">
                               Fork for brand →
-                            </button>
+                            </SubmitButton>
                           </form>
                         )}
                         {row.isDraft && row.canEdit && row.draftData && (
@@ -158,9 +159,9 @@ export function FrameworkGrid({
                         {row.isDraft && row.canPublish && (
                           <form action={publishCompetency}>
                             <input type="hidden" name="competencyId" value={row.competencyId} />
-                            <button className="text-[11px] font-medium text-[#0e7d51] hover:underline">
+                            <SubmitButton className="text-[11px] font-medium text-[#0e7d51] hover:underline" pendingText="Publishing…">
                               Publish
-                            </button>
+                            </SubmitButton>
                           </form>
                         )}
                       </div>

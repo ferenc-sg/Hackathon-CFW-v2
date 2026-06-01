@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createBrand, renameBrand, archiveBrand } from "@/app/actions/admin";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 
 type Brand = { id: string; name: string; userCount: number };
 
@@ -33,7 +34,7 @@ export function OrganisationManager({ brands }: { brands: Brand[] }) {
                     >
                       <input type="hidden" name="brandId" value={b.id} />
                       <input name="name" defaultValue={b.name} className="input !w-auto py-1" required />
-                      <button className="btn-primary px-2 py-1 text-xs">Save</button>
+                      <SubmitButton className="btn-primary px-2 py-1 text-xs" pendingText="Saving…">Save</SubmitButton>
                       <button type="button" onClick={() => setEditingId(null)} className="btn-ghost px-2 py-1 text-xs">
                         Cancel
                       </button>
@@ -51,13 +52,13 @@ export function OrganisationManager({ brands }: { brands: Brand[] }) {
                       </button>
                       <form action={archiveBrand}>
                         <input type="hidden" name="brandId" value={b.id} />
-                        <button
+                        <SubmitButton
                           className="btn-ghost px-2 py-1 text-xs text-[#C44220] disabled:opacity-40"
                           disabled={b.userCount > 0}
-                          title={b.userCount > 0 ? "Reassign members before removing" : "Remove brand"}
+                          pendingText="Removing…"
                         >
                           Remove
-                        </button>
+                        </SubmitButton>
                       </form>
                     </div>
                   )}
@@ -75,7 +76,7 @@ export function OrganisationManager({ brands }: { brands: Brand[] }) {
 
       <form action={createBrand} className="flex gap-2">
         <input name="name" placeholder="New brand / team name…" className="input" required />
-        <button className="btn-primary whitespace-nowrap">+ Add brand</button>
+        <SubmitButton className="btn-primary whitespace-nowrap" pendingText="Adding…">+ Add brand</SubmitButton>
       </form>
     </div>
   );

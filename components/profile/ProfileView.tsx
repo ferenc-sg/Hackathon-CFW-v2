@@ -19,6 +19,7 @@ import {
 } from "@/lib/enums";
 import { ProvenanceBadge, RoleBadge } from "@/components/Badges";
 import { TodoList } from "@/components/profile/TodoList";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 import {
   setLevel,
   setAssessedLevel,
@@ -150,7 +151,7 @@ export async function ProfileView({ userId }: { userId: string }) {
                     <option key={k} value={k}>{v}</option>
                   ))}
                 </select>
-                <button className="btn-secondary w-full">Save growth path</button>
+                <SubmitButton className="btn-secondary w-full" pendingText="Saving…">Save growth path</SubmitButton>
               </form>
             ) : (
               <p className="text-sm text-slate-700">
@@ -173,7 +174,7 @@ export async function ProfileView({ userId }: { userId: string }) {
                   <label className="label">Gap notes</label>
                   <textarea name="gapNotes" rows={2} defaultValue={user.devPlanGapNotes ?? ""} className="input mt-1" />
                 </div>
-                <button className="btn-secondary w-full">Save plan</button>
+                <SubmitButton className="btn-secondary w-full" pendingText="Saving…">Save plan</SubmitButton>
               </form>
             ) : (
               <div className="space-y-3 text-sm">
@@ -258,7 +259,7 @@ export async function ProfileView({ userId }: { userId: string }) {
                         <option key={f.id} value={f.id}>{f.name}</option>
                       ))}
                     </select>
-                    <button className="btn-secondary w-full">Update job family</button>
+                    <SubmitButton className="btn-secondary w-full" pendingText="Updating…">Update job family</SubmitButton>
                     <p className="text-xs text-slate-400">
                       Changing job family re-resolves competencies; removed ones are archived.
                     </p>
@@ -277,7 +278,7 @@ export async function ProfileView({ userId }: { userId: string }) {
                       ))}
                     </select>
                     <input name="cycleLabel" placeholder="Cycle label, e.g. Q2 2026 — development cycle" className="input" />
-                    <button className="btn-primary w-full">Set level &amp; record history</button>
+                    <SubmitButton className="btn-primary w-full" pendingText="Saving…">Set level &amp; record history</SubmitButton>
                   </form>
                 </div>
               )}
@@ -346,7 +347,7 @@ function CompetencyGroup({
                       <option key={l.id} value={l.id}>{l.code}</option>
                     ))}
                   </select>
-                  <button className="btn-ghost px-2 py-1 text-xs">Save</button>
+                  <SubmitButton className="btn-ghost px-2 py-1 text-xs" pendingText="…">Save</SubmitButton>
                 </form>
               ) : (
                 <span className="text-sm font-semibold text-slate-700">

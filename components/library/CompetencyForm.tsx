@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { createCompetency, updateCompetency } from "@/app/actions/library";
+import { Modal } from "@/components/ui/Modal";
+import { SubmitButton } from "@/components/ui/SubmitButton";
 
 type LevelOpt = { code: string; label: string };
 type FamilyOpt = { id: string; name: string };
@@ -38,17 +40,12 @@ export function CompetencyForm({
       <button className={triggerClassName} onClick={() => setOpen(true)}>
         {triggerLabel}
       </button>
-      {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 p-4">
-          <div className="card max-h-[90vh] w-full max-w-2xl overflow-y-auto p-6">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-base font-semibold text-slate-900">
-                {mode === "create" ? "New competency" : "Edit draft competency"}
-              </h2>
-              <button onClick={() => setOpen(false)} className="text-slate-400 hover:text-slate-600">
-                ✕
-              </button>
-            </div>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        title={mode === "create" ? "New competency" : "Edit draft competency"}
+        maxWidth="max-w-2xl"
+      >
             <form
               action={async (fd) => {
                 await action(fd);
@@ -112,17 +109,15 @@ export function CompetencyForm({
                 <button type="button" className="btn-ghost" onClick={() => setOpen(false)}>
                   Cancel
                 </button>
-                <button type="submit" name="publish" value="" className="btn-secondary">
+                <SubmitButton name="publish" value="" className="btn-secondary" pendingText="Saving…">
                   Save draft
-                </button>
-                <button type="submit" name="publish" value="1" className="btn-primary">
+                </SubmitButton>
+                <SubmitButton name="publish" value="1" className="btn-primary" pendingText="Publishing…">
                   Publish
-                </button>
+                </SubmitButton>
               </div>
             </form>
-          </div>
-        </div>
-      )}
+      </Modal>
     </>
   );
 }
