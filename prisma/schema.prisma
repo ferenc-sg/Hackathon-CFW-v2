@@ -60,9 +60,10 @@ model JobFamily {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 
-  competencyLinks JobFamilyCompetency[]
-  competencies    Competency[] // FAMILY-scoped competencies belonging directly to this family
-  users           User[]
+  competencyLinks  JobFamilyCompetency[]
+  competencies     Competency[] // FAMILY-scoped competencies belonging directly to this family
+  users            User[]
+  selfAssessments  SelfAssessment[]
 }
 
 model Competency {
@@ -188,6 +189,7 @@ model User {
   levellingHistory LevellingHistoryRecord[] @relation("HistorySubject")
   finalisedHistory LevellingHistoryRecord[] @relation("HistoryFinaliser")
   publishedVersions CompetencyLevelExpectationVersion[] @relation("VersionPublisher")
+  selfAssessments  SelfAssessment[]
 
   @@index([brandId])
   @@index([managerId])
@@ -245,4 +247,45 @@ model TodoItem {
   createdBy User? @relation("TodoCreator", fields: [createdById], references: [id])
 
   @@index([userId])
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// MODULE 3 — Self-Levelling
+// ─────────────────────────────────────────────────────────────────────────
+
+model Cycle {
+  id        String   @id @default(cuid())
+  label     String   // e.g. "H1 2026 — Development Cycle"
+  startsAt  DateTime
+  endsAt    DateTime
+  isActive  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assessments SelfAssessment[]
+}
+
+model SelfAssessment {
+  id            String    @id @default(cuid())
+  userId        String
+  cycleId       String
+  jobFamilyId   String?   // selected at session start; locked once answers begin
+  track         String    // "IC" | "M"
+  status        String    @default("draft") // "draft" | "submitted"
+  startedAt     DateTime  @default(now())
+  submittedAt   DateTime?
+  answers       Json      // { [subdimensionId]: { levelCode, levelValue } }
+  themeResults  Json?     // { [themeId]: { average, dominantLevel } }
+  overallResult Json?     // { average, indicativeLevel }
+  archivedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user      User       @relation(fields: [userId], references: [id])
+  cycle     Cycle      @relation(fields: [cycleId], references: [id])
+  jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
+
+  @@unique([userId, cycleId])
+  @@index([userId])
+  @@index([cycleId])
 }
