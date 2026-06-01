@@ -77,7 +77,6 @@ export default async function LibraryPage({
   });
   const brands = await prisma.brand.findMany({ where: { archivedAt: null }, orderBy: { name: "asc" } });
 
-  // Brand context: HR admin chooses; brand admin is fixed to their brand.
   const currentBrandId =
     actor.role === Role.BRAND_ADMIN ? actor.brandId : sp.brand || null;
   const currentBrandName = brands.find((b) => b.id === currentBrandId)?.name ?? null;
@@ -142,8 +141,6 @@ export default async function LibraryPage({
     });
   } else if (view.startsWith("family-")) {
     const familyId = view.slice("family-".length);
-    // Functional competencies are defined on the IC levels in the source
-    // spreadsheet, so the family grid shows the IC2–IC5 columns.
     const icLevels = levels.filter((l) => l.track.name === "IC");
     columns = icLevels.map((l) => ({ code: l.code, label: l.label, track: l.track.name }));
     const codes = columns.map((c) => c.code);
@@ -163,7 +160,6 @@ export default async function LibraryPage({
 
     const baselineIds = links.map((l) => l.competencyId);
 
-    // Forks for the current brand override their baseline.
     const forks = currentBrandId
       ? await prisma.competency.findMany({
           where: {
@@ -193,7 +189,6 @@ export default async function LibraryPage({
         canEdit: base.canEdit,
         canPublish: base.canPub,
         isFork: false,
-        // Offer fork only if not already forked for this brand and actor may create brand content.
         canFork:
           c.provenance === Provenance.SHARED_BASELINE &&
           !fork &&
@@ -230,7 +225,7 @@ export default async function LibraryPage({
           <div className="flex items-center gap-1.5">
             <span className="label">Brand context</span>
             {actor.role === Role.BRAND_ADMIN ? (
-              <span className="badge bg-violet-100 text-violet-700">{currentBrandName}</span>
+              <span className="badge bg-[#EDE9FC] text-[#5B52B0]">{currentBrandName}</span>
             ) : (
               <BrandSelect brands={brands.map((b) => ({ id: b.id, name: b.name }))} value={currentBrandId ?? ""} />
             )}
@@ -240,7 +235,6 @@ export default async function LibraryPage({
       </PageHeader>
 
       <div className="p-8">
-        {/* View tabs */}
         <div className="mb-5 flex flex-wrap gap-2">
           {tabs.map((t) => {
             const active = view === t.key;

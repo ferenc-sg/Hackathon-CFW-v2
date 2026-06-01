@@ -2,7 +2,7 @@ import { Provenance, PROVENANCE_LABELS, ExpectationStatus } from "@/lib/enums";
 
 const PROVENANCE_STYLES: Record<string, string> = {
   SHARED_BASELINE: "bg-slate-100 text-slate-600 border border-slate-200",
-  BRAND_ADDON: "bg-violet-100 text-violet-700 border border-violet-200",
+  BRAND_ADDON: "bg-[#EDE9FC] text-[#5B52B0] border border-[#EDE9FC]",
   BRAND_FORK: "bg-amber-100 text-amber-800 border border-amber-200",
   CUSTOM: "bg-emerald-100 text-emerald-700 border border-emerald-200",
 };
@@ -23,8 +23,8 @@ export function StatusBadge({ status }: { status: string }) {
     <span
       className={`badge ${
         published
-          ? "bg-green-100 text-green-700 border border-green-200"
-          : "bg-yellow-100 text-yellow-800 border border-yellow-200"
+          ? "bg-green-50 text-[#0e7d51] border border-green-200"
+          : "bg-amber-100 text-amber-800 border border-amber-200"
       }`}
     >
       {published ? "Published" : "Draft"}

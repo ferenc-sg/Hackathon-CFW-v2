@@ -85,7 +85,7 @@ export function Sidebar({
                       </span>
                       <span className="flex-1">{item.label}</span>
                       {item.placeholder && (
-                        <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[10px] font-medium text-slate-400">
+                        <span className="rounded bg-[#EDE9FC] px-1.5 py-0.5 text-[10px] font-medium text-[#5B52B0]">
                           Soon
                         </span>
                       )}

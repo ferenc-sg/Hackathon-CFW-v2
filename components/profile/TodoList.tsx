@@ -89,7 +89,7 @@ export function TodoList({
                       <button
                         type="submit"
                         aria-label="Mark incomplete"
-                        className="flex h-5 w-5 items-center justify-center rounded-full bg-brand-600 text-white"
+                        className="flex h-5 w-5 items-center justify-center rounded-full bg-[#0e7d51] text-white"
                       >
                         <svg viewBox="0 0 16 16" className="h-3 w-3" fill="currentColor">
                           <path d="M6.5 10.6 3.9 8l-1 1 3.6 3.6 7-7-1-1z" />

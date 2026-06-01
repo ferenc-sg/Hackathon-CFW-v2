@@ -42,7 +42,7 @@ export function GridCell({
           {open ? "▾" : "▸"} {cell.bullets.length} {cell.bullets.length === 1 ? "point" : "points"}
         </button>
         {hasDraft && (
-          <span className="badge bg-yellow-100 text-yellow-800" title="Unpublished draft pending">
+          <span className="badge bg-[#FDE8E3] text-[#C44220]" title="Unpublished draft pending">
             ● draft
           </span>
         )}
@@ -59,11 +59,11 @@ export function GridCell({
           )}
 
           {hasDraft && !editing && (
-            <div className="rounded-md border border-yellow-200 bg-yellow-50 p-2">
-              <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-yellow-700">
+            <div className="rounded-md border border-[#F04E23]/20 bg-[#FDE8E3] p-2">
+              <div className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-[#C44220]">
                 Pending draft (preview)
               </div>
-              <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-yellow-900">
+              <ul className="list-disc space-y-1 pl-4 text-xs leading-relaxed text-[#2E2B27]">
                 {cell.draftBullets!.map((b, i) => (
                   <li key={i}>{b}</li>
                 ))}

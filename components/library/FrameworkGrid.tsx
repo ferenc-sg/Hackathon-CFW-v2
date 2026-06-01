@@ -32,7 +32,6 @@ export function FrameworkGrid({
 }) {
   const [expandedAll, setExpandedAll] = useState(false);
 
-  // Insert a visual divider header between IC and M columns when both present.
   const tracks = Array.from(new Set(columns.map((c) => c.track)));
 
   return (
@@ -89,7 +88,7 @@ export function FrameworkGrid({
                       <span className="text-[10px] text-slate-400">{row.brandName}</span>
                     )}
                     {row.overridesBaselineName && (
-                      <span className="text-[10px] italic text-amber-600">
+                      <span className="text-[10px] italic text-[#C44220]">
                         overrides baseline for this brand
                       </span>
                     )}
