@@ -4,13 +4,12 @@
 set -e
 
 echo "→ Applying database schema (prisma db push)…"
-npx prisma db push --skip-generate
+# --accept-data-loss lets the startup reconcile schema changes such as dropping
+# the now-unused passwordHash column. Career-framework data is unaffected.
+npx prisma db push --skip-generate --accept-data-loss
 
 echo "→ Seeding if empty…"
 npx tsx prisma/seed-if-empty.ts
-
-echo "→ Backfilling missing passwords…"
-npx tsx prisma/backfill-passwords.ts
 
 echo "→ Starting Next.js…"
 exec npm run start

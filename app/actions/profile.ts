@@ -4,7 +4,6 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { getActor } from "@/lib/session";
 import { resolveCompetencies } from "@/lib/readContract";
-import { hashPassword } from "@/lib/password";
 import {
   Role,
   LevellingMethod,
@@ -195,9 +194,6 @@ export async function createUser(formData: FormData) {
   const role = String(formData.get("role") || Role.TEAM_MEMBER);
   const jobFamilyId = String(formData.get("jobFamilyId") || "");
   const managerId = String(formData.get("managerId") || "");
-  // Password for email+password login; defaults to the shared demo password so
-  // a newly created tester can sign in immediately.
-  const password = String(formData.get("password") || "") || (process.env.SEED_PASSWORD || "password123");
 
   if (!name || !email) throw new Error("Name and email are required.");
   if (!(role in Role)) throw new Error("Invalid role.");
@@ -206,7 +202,6 @@ export async function createUser(formData: FormData) {
     data: {
       name,
       email,
-      passwordHash: await hashPassword(password),
       brandId,
       role: role as Role,
       jobFamilyId: jobFamilyId || null,

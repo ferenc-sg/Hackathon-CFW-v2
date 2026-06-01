@@ -13,7 +13,6 @@ import {
   TodoTrigger,
   GrowthPath,
 } from "../lib/enums";
-import { hashPassword } from "../lib/password";
 
 const prisma = new PrismaClient();
 
@@ -358,13 +357,6 @@ async function main() {
       { userId: maya.id, cycleLabel: "Q4 2025 — performance cycle", trackId: icTrackId, levelId: levelByCode["IC4"], method: LevellingMethod.HR_ADMIN_MANUAL, finalisedById: anna.id, finalisedAt: new Date("2025-12-12") },
     ],
   });
-
-  // Give every seeded user the same demo password so the team can sign in as
-  // any persona to test the permission matrix.
-  const demoPassword = process.env.SEED_PASSWORD || "password123";
-  const demoHash = await hashPassword(demoPassword);
-  await prisma.user.updateMany({ data: { passwordHash: demoHash } });
-  console.log(`All seeded users can sign in with password: "${demoPassword}"`);
 
   const counts = {
     brands: await prisma.brand.count(),

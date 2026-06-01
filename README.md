@@ -48,11 +48,9 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 - A left sidebar with **Dashboard**, **Framework Library**, **People**, plus
   empty placeholders for **Leveling** (Module 3 — Levelling Flow) and
   **Performance assessment**.
-- **Email + password** sign-in (Auth.js Credentials). Only provisioned users
-  (an email matching a non-archived `User` with a password set) may sign in.
-  Single sign-on (Google) is deferred for later.
-- An "Acting as" switcher (bottom of sidebar, **HR/Admin only**) to impersonate
-  any user and see the permission matrix in action, plus a **Sign out** button.
+- **No authentication** — the app is open. The "Acting as" switcher (bottom of
+  the sidebar) selects which user you view the app as, so you can exercise the
+  full permission matrix across roles. (Auth can be added later.)
 
 ---
 
@@ -60,14 +58,13 @@ Built with **Next.js (App Router) · TypeScript · Prisma · SQLite · Tailwind 
 
 ```bash
 npm install
-cp .env.example .env   # AUTH_DEV_BYPASS="true" skips login for local dev
+cp .env.example .env   # only DATABASE_URL is needed
 npm run setup          # prisma generate + db push + seed
 npm run dev            # http://localhost:3000
 ```
 
-> **Local auth:** with `AUTH_DEV_BYPASS="true"` the app skips login and acts as
-> the first HR/Admin — convenient for development. Set it to `"false"` to use the
-> real email+password sign-in (any seeded user, password `password123`).
+> The app is open (no login). Use the **Acting as** switcher in the sidebar to
+> view it as any seeded user — it defaults to the first HR/Admin.
 
 Other scripts:
 
@@ -112,29 +109,15 @@ levels (as in the source sheets); the general competencies carry IC2–IC5 **and
 M4–M6. Re-running the extractor regenerates the JSON to re-import on demand
 (FR17c).
 
-## Authentication — email + password
+## Authentication
 
-Sign-in uses **Auth.js (NextAuth v5)** with a Credentials provider. (Google SSO
-is deferred; the scaffolding is in place to add it later without re-architecting.)
+The app currently runs **without authentication** — anyone with the URL has full
+access. Roles are still enforced in the app relative to the **current user**,
+which you choose with the **"Acting as"** switcher in the sidebar (defaults to the
+first HR/Admin). This keeps testing frictionless; sign-in can be added later.
 
-- **Who can sign in:** users provisioned in the system — an email matching a
-  non-archived `User` that has a password set. An HR/Admin creates people via
-  **People → New user** (which sets a password and seeds their competencies +
-  onboarding to-dos).
-- **Demo password:** the seed gives **every seeded user** the password from
-  `SEED_PASSWORD` (default `password123`), so you can sign in as any persona
-  (e.g. `ferenc@saas.group` = HR/Admin, `sofia@channable.example` = Manager,
-  `diego@channable.example` = Team member) to test the permission matrix.
-- **Passwords** are stored as bcrypt hashes (`User.passwordHash`); never in plain
-  text. Sessions are stateless JWT cookies; the signed-in email is mapped to the
-  `User` record each request to resolve role + brand.
-- **Impersonation:** an HR/Admin can "act as" another user; everyone else is
-  locked to their own identity. **Sign out** is in the sidebar.
-
-### Setup
-Just set a strong `AUTH_SECRET` (and `AUTH_TRUST_HOST=true` behind a proxy).
-Generate the secret with `openssl rand -base64 32`. Change `SEED_PASSWORD` to a
-non-default value for any shared deployment.
+> Because there's no login, treat the deployed URL as semi-private — share it
+> only with your team, or put it behind your network/VPN if it must stay closed.
 
 ## Deploying so your team can test
 
@@ -161,24 +144,19 @@ database **once** if it is empty (`scripts/docker-start.sh` →
 2. **Add a persistent volume.** Open the service → **Variables/Settings →
    Volumes** (or right-click the service → *Attach Volume*) → create a volume
    and set the **mount path** to `/data`. (1 GB is plenty.)
-3. **Set the env vars.** Service → **Variables** → add:
+3. **Set the env var.** Service → **Variables** → add just:
    ```
    DATABASE_URL=file:/data/dev.db
-   AUTH_SECRET=<openssl rand -base64 32>
-   AUTH_TRUST_HOST=true
-   SEED_PASSWORD=<a shared password for the seeded test users>
    ```
-   Don't set `PORT` (Railway injects it) and **don't** set `AUTH_DEV_BYPASS`
-   (leaving it unset keeps login enforced).
+   Don't set `PORT` (Railway injects it). No auth variables are needed.
 4. **Expose a public URL.** Service → **Settings → Networking → Generate
    Domain** — gives you a `*.up.railway.app` URL.
 5. **Redeploy** (Railway usually does this automatically after the volume + var
    changes). Watch the **Deploy logs** — on first boot you'll see
    `Applying database schema…`, `Empty database detected — running seed…`, then
    `Starting Next.js…`.
-6. **Sign in and invite your team.** Sign in as `ferenc@saas.group` (seeded
-   HR/Admin) with your `SEED_PASSWORD`. Add teammates via **People → New user**
-   with their email + a password so they can sign in too.
+6. **Open the URL and share it** with your team. The app opens straight to the
+   dashboard; use the **Acting as** switcher to test different roles.
 
 **If a later deploy ever needs a fresh database** (e.g. you re-import the
 spreadsheet): open the service shell / one-off command and run
@@ -198,16 +176,12 @@ to the Postgres connection string, run `prisma db push` + seed once, then deploy
 I can make this switch for you if you'd like to go this route.
 
 ### Before you publish — things to know
-- **Access is gated by email + password** and limited to provisioned users, so
-  the URL is only usable by people you've given an account. Make sure
-  `AUTH_DEV_BYPASS` is **unset/false** in the deploy (it is by default), and set a
-  non-default `SEED_PASSWORD`.
-- **This is a shared test password setup**, not production-grade auth (no
-  password reset, lockout, or MFA). Fine for an internal test; Google SSO is the
-  intended longer-term sign-in.
+- **There is no authentication** — anyone with the URL has full access. Share it
+  only with your team, or keep it behind your network/VPN. Add auth before any
+  wider or external exposure.
 - **Seed data includes demo users** (e.g. `*.example` accounts) used to showcase
-  the permission matrix — they all share the `SEED_PASSWORD`. Remove them once
-  real users are added if you prefer a clean directory.
+  the permission matrix. Remove them once real users are added if you prefer a
+  clean directory.
 
 ## Out of scope for v1 (per PRD §7)
 Levelling Flow execution, onboarding/education UI, performance ratings,

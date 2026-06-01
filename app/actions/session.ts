@@ -2,33 +2,17 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
-import { ACTOR_COOKIE_NAME, getSelf } from "@/lib/session";
-import { signOut } from "@/auth";
-import { Role } from "@/lib/enums";
+import { ACTOR_COOKIE_NAME } from "@/lib/session";
 
-// HR/Admin-only impersonation ("act as") for testing the permission matrix.
+// The app is open (no auth). The "act as" switcher selects which user you are
+// viewing as, via a cookie.
 export async function setActor(formData: FormData) {
-  const self = await getSelf();
-  if (!self || self.role !== Role.HR_ADMIN) throw new Error("Not permitted to impersonate.");
-
   const id = String(formData.get("userId") ?? "");
   const store = await cookies();
-  if (id && id !== self.id) {
-    store.set(ACTOR_COOKIE_NAME, id, { httpOnly: true, sameSite: "lax", path: "/" });
+  if (id) {
+    store.set(ACTOR_COOKIE_NAME, id, { httpOnly: false, sameSite: "lax", path: "/" });
   } else {
     store.delete(ACTOR_COOKIE_NAME);
   }
   revalidatePath("/", "layout");
-}
-
-export async function stopImpersonating() {
-  const store = await cookies();
-  store.delete(ACTOR_COOKIE_NAME);
-  revalidatePath("/", "layout");
-}
-
-export async function signOutAction() {
-  const store = await cookies();
-  store.delete(ACTOR_COOKIE_NAME);
-  await signOut({ redirectTo: "/login" });
 }
