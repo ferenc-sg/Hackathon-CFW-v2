@@ -1,0 +1,248 @@
+// Career Framework Management System (CFMS) — Prisma schema
+// Modules 1 (Framework Library) + 2 (User Profile) per PRD v1.0.
+//
+// Notes on the SQLite target:
+//  - Prisma enums are unsupported on SQLite, so enum-typed fields are modelled
+//    as String. Allowed values are centralised in lib/enums.ts and enforced at
+//    the application layer (per PRD §5 "Enforce at the application layer").
+//  - The PRD requires `bullets` to be a JSON column (jsonb), not a text blob.
+//    SQLite stores Prisma `Json` as JSON text; ordering is inherent to the array.
+//  - Soft-delete via `archivedAt` everywhere; no hard deletes (PRD §M1.6, §5).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// MODULE 1 — Framework Library
+// ─────────────────────────────────────────────────────────────────────────
+
+model Track {
+  id        String   @id @default(cuid())
+  name      String   @unique // Enum: IC | M
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  levels                Level[]
+  usersOnTrack          User[]                  @relation("UserTrack")
+  levellingHistory      LevellingHistoryRecord[]
+}
+
+model Level {
+  id        String   @id @default(cuid())
+  trackId   String
+  code      String   @unique // e.g. IC2, IC3, IC4, IC5, M4, M5, M6
+  label     String // e.g. "Beginner", "Team Lead"
+  order     Int // sort order within the track
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  track        Track                        @relation(fields: [trackId], references: [id])
+  expectations CompetencyLevelExpectation[]
+  usersAtLevel User[]                       @relation("UserLevel")
+  assessedFor  UserCompetency[]
+  history      LevellingHistoryRecord[]
+
+  @@index([trackId])
+}
+
+model JobFamily {
+  id           String    @id @default(cuid())
+  name         String
+  description  String?
+  displayOrder Int // sort order in admin view and dropdowns
+  archivedAt   DateTime? // soft-delete
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  competencyLinks JobFamilyCompetency[]
+  competencies    Competency[] // FAMILY-scoped competencies belonging directly to this family
+  users           User[]
+}
+
+model Competency {
+  id          String    @id @default(cuid())
+  name        String
+  description String?
+  type        String // Enum: GENERAL | FUNCTIONAL | CUSTOM
+  scope       String // Enum: GLOBAL | FAMILY
+  provenance  String // Enum: SHARED_BASELINE | BRAND_ADDON | BRAND_FORK | CUSTOM
+  jobFamilyId String? // null for GLOBAL scope
+  brandId     String? // set for BRAND_ADDON, BRAND_FORK, CUSTOM
+  forkedFromId String? // set for BRAND_FORK -> baseline competency
+  archivedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  jobFamily  JobFamily?  @relation(fields: [jobFamilyId], references: [id])
+  brand      Brand?      @relation(fields: [brandId], references: [id])
+  forkedFrom Competency? @relation("CompetencyFork", fields: [forkedFromId], references: [id])
+  forks      Competency[] @relation("CompetencyFork")
+
+  expectations    CompetencyLevelExpectation[]
+  jobFamilyLinks  JobFamilyCompetency[]
+  userCompetencies UserCompetency[]
+
+  @@index([jobFamilyId])
+  @@index([brandId])
+  @@index([forkedFromId])
+}
+
+model JobFamilyCompetency {
+  id           String   @id @default(cuid())
+  jobFamilyId  String
+  competencyId String
+  displayOrder Int // authoritative ordering within the family (source spreadsheet row order)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  jobFamily  JobFamily  @relation(fields: [jobFamilyId], references: [id])
+  competency Competency @relation(fields: [competencyId], references: [id])
+
+  @@unique([jobFamilyId, competencyId])
+  @@index([jobFamilyId])
+}
+
+model CompetencyLevelExpectation {
+  id           String   @id @default(cuid())
+  competencyId String
+  levelId      String
+  bullets      Json // ordered array of published bullet strings (jsonb-equivalent)
+  draftBullets Json? // pending unpublished edit; null when there is no pending draft
+  status       String // Enum: DRAFT (never published) | PUBLISHED (has live bullets)
+  version      Int      @default(1)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  competency Competency                          @relation(fields: [competencyId], references: [id])
+  level      Level                               @relation(fields: [levelId], references: [id])
+  versions   CompetencyLevelExpectationVersion[]
+
+  @@unique([competencyId, levelId])
+  @@index([competencyId])
+}
+
+model CompetencyLevelExpectationVersion {
+  id                           String   @id @default(cuid())
+  competencyLevelExpectationId String
+  version                      Int
+  bullets                      Json
+  publishedAt                  DateTime @default(now())
+  publishedById                String?
+
+  expectation CompetencyLevelExpectation @relation(fields: [competencyLevelExpectationId], references: [id])
+  publishedBy User?                      @relation("VersionPublisher", fields: [publishedById], references: [id])
+
+  @@index([competencyLevelExpectationId])
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  archivedAt DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  competencies Competency[]
+  users        User[]
+}
+
+// ─────────────────────────────────────────────────────────────────────────
+// MODULE 2 — User Profile
+// ─────────────────────────────────────────────────────────────────────────
+
+model User {
+  id                  String    @id @default(cuid())
+  name                String
+  email               String    @unique
+  brandId             String
+  managerId           String?
+  role                String // Enum: HR_ADMIN | BRAND_ADMIN | MANAGER | TEAM_MEMBER
+  jobFamilyId         String?
+  trackId             String?
+  levelId             String?
+  growthPath          String? // Enum (see lib/enums.ts) | null
+  growthPathUpdatedAt DateTime?
+  devPlanFocusAreas   String?
+  devPlanGapNotes     String?
+  devPlanUpdatedAt    DateTime?
+  archivedAt          DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  brand     Brand      @relation(fields: [brandId], references: [id])
+  manager   User?      @relation("UserManager", fields: [managerId], references: [id])
+  reports   User[]     @relation("UserManager")
+  jobFamily JobFamily? @relation(fields: [jobFamilyId], references: [id])
+  track     Track?     @relation("UserTrack", fields: [trackId], references: [id])
+  level     Level?     @relation("UserLevel", fields: [levelId], references: [id])
+
+  competencies     UserCompetency[]
+  todos            TodoItem[]               @relation("TodoOwner")
+  createdTodos     TodoItem[]               @relation("TodoCreator")
+  levellingHistory LevellingHistoryRecord[] @relation("HistorySubject")
+  finalisedHistory LevellingHistoryRecord[] @relation("HistoryFinaliser")
+  publishedVersions CompetencyLevelExpectationVersion[] @relation("VersionPublisher")
+
+  @@index([brandId])
+  @@index([managerId])
+  @@index([jobFamilyId])
+}
+
+model UserCompetency {
+  id              String    @id @default(cuid())
+  userId          String
+  competencyId    String
+  assessedLevelId String?
+  assessedAt      DateTime?
+  archivedAt      DateTime? // set when job family changes; archived, not deleted
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  user          User       @relation(fields: [userId], references: [id])
+  competency    Competency @relation(fields: [competencyId], references: [id])
+  assessedLevel Level?     @relation(fields: [assessedLevelId], references: [id])
+
+  @@unique([userId, competencyId])
+  @@index([userId])
+}
+
+model LevellingHistoryRecord {
+  id            String   @id @default(cuid())
+  userId        String
+  cycleLabel    String
+  trackId       String
+  levelId       String
+  method        String // Enum: LEVELLING_FLOW | MANAGER_MANUAL | HR_ADMIN_MANUAL
+  finalisedById String
+  finalisedAt   DateTime @default(now())
+
+  user        User  @relation("HistorySubject", fields: [userId], references: [id])
+  track       Track @relation(fields: [trackId], references: [id])
+  level       Level @relation(fields: [levelId], references: [id])
+  finalisedBy User  @relation("HistoryFinaliser", fields: [finalisedById], references: [id])
+
+  @@index([userId])
+}
+
+model TodoItem {
+  id          String    @id @default(cuid())
+  userId      String
+  title       String
+  triggerType String // Enum: ONBOARDING | CYCLE | MANUAL
+  completedAt DateTime?
+  archivedAt  DateTime?
+  createdById String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user      User  @relation("TodoOwner", fields: [userId], references: [id])
+  createdBy User? @relation("TodoCreator", fields: [createdById], references: [id])
+
+  @@index([userId])
+}
