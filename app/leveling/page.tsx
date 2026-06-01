@@ -1,27 +1,36 @@
 import { PageHeader } from "@/components/PageHeader";
 import { prisma } from "@/lib/db";
 import { getActorUser } from "@/lib/session";
+import { getActor } from "@/lib/session";
 import { SelfLevellingFlow } from "@/components/levelling/SelfLevellingFlow";
+import { CycleManager } from "@/components/levelling/CycleManager";
 import { getCompetencySet } from "@/lib/self-levelling-content";
 import type { ThemeResult, OverallResult } from "@/lib/self-levelling-types";
+import { Role } from "@/lib/enums";
 
 export default async function LevelingPage() {
-  const user = await getActorUser();
+  const [user, actor] = await Promise.all([getActorUser(), getActor()]);
+  const isHrAdmin = actor?.role === Role.HR_ADMIN;
 
-  const cycle = await prisma.cycle.findFirst({
-    where: { isActive: true },
-    orderBy: { startsAt: "desc" },
-  });
+  const [cycle, allCycles] = await Promise.all([
+    prisma.cycle.findFirst({ where: { isActive: true }, orderBy: { startsAt: "desc" } }),
+    isHrAdmin ? prisma.cycle.findMany({ orderBy: { startsAt: "desc" } }) : Promise.resolve([]),
+  ]);
 
   if (!cycle) {
     return (
       <div>
         <PageHeader title="Leveling" subtitle="Self-assessment exercise" />
         <div className="p-8">
-          <div className="card p-8 text-center text-slate-500">
-            <p className="font-medium">No active levelling cycle</p>
-            <p className="text-sm mt-1">An HR admin needs to open a new cycle before self-levelling is available.</p>
-          </div>
+          {isHrAdmin && (
+            <CycleManager cycles={allCycles} />
+          )}
+          {!isHrAdmin && (
+            <div className="card p-8 text-center text-slate-500">
+              <p className="font-medium">No active levelling cycle</p>
+              <p className="text-sm mt-1">An HR admin needs to open a new cycle before self-levelling is available.</p>
+            </div>
+          )}
         </div>
       </div>
     );
@@ -71,6 +80,7 @@ export default async function LevelingPage() {
         subtitle={`${cycle.label} — self-assessment exercise`}
       />
       <div className="px-8">
+        {isHrAdmin && <CycleManager cycles={allCycles} />}
         <SelfLevellingFlow
           cycleId={cycle.id}
           cycleLabel={cycle.label}
