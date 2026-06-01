@@ -2,6 +2,18 @@ import { redirect } from "next/navigation";
 import { getSelf } from "@/lib/session";
 import { signIn } from "@/auth";
 
+// Auth.js sign-in error codes → human-readable guidance.
+const ERROR_MESSAGES: Record<string, string> = {
+  // Server isn't configured: AUTH_SECRET and/or AUTH_GOOGLE_ID/SECRET missing.
+  Configuration:
+    "Sign-in isn't configured on the server yet. An admin needs to set AUTH_SECRET, AUTH_GOOGLE_ID and AUTH_GOOGLE_SECRET (and AUTH_TRUST_HOST) in the deployment.",
+  // signIn callback rejected the account (not a provisioned user / wrong domain).
+  AccessDenied:
+    "That account isn't provisioned for the CFMS. Ask an HR/Admin to add you (People → New user) with this email, then try again.",
+  Verification: "This sign-in link is no longer valid. Please try again.",
+  Default: "Sign-in failed. Please try again.",
+};
+
 export default async function LoginPage({
   searchParams,
 }: {
@@ -27,10 +39,9 @@ export default async function LoginPage({
         <p className="mt-1 text-sm text-slate-500">saas.group · CFMS</p>
 
         {error && (
-          <div className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-            {error === "AccessDenied"
-              ? "That account isn't provisioned for the CFMS. Ask an HR/Admin to add you, then try again."
-              : "Sign-in failed. Please try again."}
+          <div className="mt-5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-left text-sm text-red-700">
+            {ERROR_MESSAGES[error] ?? ERROR_MESSAGES.Default}
+            <span className="mt-1 block text-[11px] text-red-400">Error code: {error}</span>
           </div>
         )}
 
