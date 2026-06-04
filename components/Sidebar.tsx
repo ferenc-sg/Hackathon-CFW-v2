@@ -52,14 +52,11 @@ export function Sidebar({
 
   return (
     <aside className="flex h-full w-64 shrink-0 flex-col border-r border-slate-200 bg-white">
-      <div className="flex items-center gap-2 px-5 py-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#7B6FCC] font-bold text-white">
-          CF
-        </div>
-        <div className="leading-tight">
-          <div className="text-sm font-semibold text-slate-900">Career Framework</div>
-          <div className="text-xs text-slate-500">saas.group · CFMS</div>
-        </div>
+      <div className="px-5 py-5">
+        {/* saas.group logo — swap public/saas-group-logo.svg with the official asset to update. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/saas-group-logo.svg" alt="saas.group" className="h-7 w-auto" />
+        <div className="mt-2 text-xs text-slate-500">Career Framework · CFMS</div>
       </div>
 
       <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-2">
